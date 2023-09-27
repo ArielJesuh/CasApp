@@ -1,0 +1,44 @@
+<mat-sidenav-container>
+    <mat-sidenav [opened]="opened" mode="side" [class.close]="!opened">
+        <mat-nav-list>
+            <mat-list-item>
+                <div class="item">
+                    <button mat-icon-button>
+                        <mat-icon>
+                            <span class="material-symbols-outlined">
+                                map
+                            </span>
+                        </mat-icon>
+                    </button>
+                    <a *ngIf="opened">Mapa</a>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div class="item">
+                    <button mat-icon-button>
+                        <mat-icon mat-list-icon>
+                            <span class="material-symbols-outlined">
+                                favorite
+                            </span></mat-icon>
+                    </button>
+                    <a *ngIf="opened">Favoritos</a>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div class="item">
+                    <button mat-icon-button>
+                        <mat-icon mat-list-icon>
+                            <span class="material-symbols-outlined">
+                                compare_arrows
+                                </span>
+                        </mat-icon>
+                    </button>
+                    <a *ngIf="opened">Comparar</a>
+                </div>
+            </mat-list-item>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content [class.close]="!opened">
+Aqui debe ir la tarjeta de la vivienda        
+    </mat-sidenav-content>
+</mat-sidenav-container>

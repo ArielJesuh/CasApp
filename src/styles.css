@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    margin: 0;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+  }
+  /* Logo styles */
+  .logo {
+    max-width: 100px;
+  }
+
+  .ico-user {
+    max-width: 30px;
+    max-height: 30px;
+    align-self: center;
+    margin-left:auto;
+  }
+  .ico-config {
+    max-width: 30px;
+    max-height: 30px;
+    align-self: center;
+    padding-right: 2%;
+  }
+  h1 {
+    align-self: center;
+  }
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
