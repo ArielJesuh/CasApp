@@ -24,12 +24,44 @@ body{
   h1 {
     align-self: center;
   }
-
+  h2 {
+    align-self: center;
+  }
   /* Sobrescribe el color del mat-toolbar */
 mat-toolbar[color="primary"] {
   background-color: var(--primary);
 }
+.vivienda-card {
+  display: flex;
+  align-items: center;
+}
 
+.vivienda-image {
+  flex: 1;
+  padding: 16px;
+  margin-left: 15%;
+  
+}
 
+.vivienda-info {
+  flex: 2;
+  margin-right: 30%;
+}
+
+img.casa-img{
+  max-width: 450px;
+  max-height: 450px;
+  border-radius: 50px;
+}
+
+.big-card{
+display: flex;
+align-self:center ;
+}
+
+.contenedor-botones-tarjeta{
+  display: flex;
+  justify-content: center;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
