@@ -2,14 +2,11 @@
 body{
     margin: 0;
 }
-header {
-    background-color: #333;
-    color: #fff;
-    display: flex;
-  }
+
   /* Logo styles */
   .logo {
-    max-width: 100px;
+    max-width: 85px;
+    max-height: 80px;
   }
 
   .ico-user {
@@ -27,6 +24,11 @@ header {
   h1 {
     align-self: center;
   }
+
+  /* Sobrescribe el color del mat-toolbar */
+mat-toolbar[color="primary"] {
+  background-color: var(--primary);
+}
 
 
 html, body { height: 100%; }
