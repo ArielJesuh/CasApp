@@ -3,15 +3,15 @@
         <h1>Iniciar Sesion</h1>
         <mat-form-field >
           <mat-label>Nombre de usuario</mat-label>
-          <input matInput >
+          <input matInput [(ngModel)] = "nombre_usuario" name="nombre_usuario">
         </mat-form-field>
         <mat-form-field >
             <mat-label>Contraseña</mat-label>
-            <input matInput >
+            <input matInput  [(ngModel)] = "contrasenia" name="contrasenia">
           </mat-form-field>
           <div class="button-row">
-          <button mat-raised-button color="primary">Iniciar Sesión</button>
-          <button class = "register-btn" mat-raised-button color="primary">Registrarse</button>
+          <button mat-raised-button color="primary" (click)="login()">Iniciar Sesión</button>
+          <button class = "register-btn" mat-raised-button color="primary"  routerLink="/register">Registrarse</button>
         </div>
         </form>
 </div>

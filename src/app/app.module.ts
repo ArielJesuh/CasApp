@@ -15,6 +15,10 @@ import {MatCardModule} from '@angular/material/card';
 import { LoginComponent } from './components/login/login.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { RegisterComponent } from './components/register/register.component';
+import {HttpClientModule} from '@angular/common/http'
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,8 @@ import {MatInputModule} from '@angular/material/input';
     HeaderComponent,
     LeftPanelComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,13 @@ import {MatInputModule} from '@angular/material/input';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(
+
+    ),
 
   ],
   providers: [],
