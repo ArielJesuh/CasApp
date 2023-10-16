@@ -1,0 +1,27 @@
+    <div class="title">
+        <h4>Listado de Usuarios</h4>
+    </div>
+    <table *ngIf="listUsuarios.length > 0" >
+        <thead>
+          <tr>
+            <th scope="col">Nombre Usuario</th>
+            <th scope="col">Contraseña</th>
+            <th scope="col">Email</th>
+            <th scope="col">Run</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Tipo</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of listUsuarios" class="table-active">
+            <td>{{ usuario.nombre_usuario }}</td>
+            <td>{{ usuario.contrasena }}</td>
+            <td>{{ usuario.email  }}</td>
+            <td>{{ usuario.run }}</td>
+            <td>{{ usuario.telefono }}</td>
+            <td>{{ usuario.tipo }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <h5 *ngIf="listUsuarios.length == 0">No hay productos para mostrar</h5>

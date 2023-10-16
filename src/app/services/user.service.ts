@@ -15,6 +15,10 @@ export class UserService {
     this.myApiUrl='api/usuarios'
   }
 
+  getListUsuarios(): Observable<Usuario[]> {
+    return this.http.get<Usuario[]>(`${this.myAppUrl}${this.myApiUrl}`)
+  }
+
   register(user:Usuario):Observable<any>{
     return this.http.post(`${this.myAppUrl}${this.myApiUrl}`,user)
   }
