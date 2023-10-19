@@ -59,12 +59,34 @@
               <!-- Botón "Guardar Filtro" al lado derecho del campo "Habitaciones" -->
               <button class="btn btn-primary col-1 m-2">Guardar Filtro</button>
                <!-- Botón "Guardar" al lado derecho del campo "Baños" -->
-               <button class="btn btn-primary col-1 m-2" >Guardar</button>
+               <button class="btn btn-primary col-1 m-2" >Buscar</button>
           
             </div>
           </div>
                  
         </mat-expansion-panel>
       </mat-accordion>   
+      <div>
+
+      <div class="formulario">
+          <form [formGroup]="formMapas" (ngSubmit)="onSubmit()">
+        
+            <input type="text" #inputPlaces id="inputPlaces" formControlName="busqueda">
+        
+            <div class="form panel">
+        
+              <div>
+                <img class="sb-title-icon" src="https://fonts.gstatic.com/s/i/googlematerialicons/location_pin/v5/24px.svg"
+                  alt="">
+              </div>
+            </div>
+
+            <!-- Añade una clase al div contenedor del mapa y ajusta el estilo -->
+            <div class="mapa" #divMap style="width: 100%; height: 600px; margin: 0 auto;"></div>
+
+            
+          </form>
+        </div>
+      </div>
 </body>
 </html>
