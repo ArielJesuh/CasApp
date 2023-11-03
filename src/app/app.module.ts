@@ -17,10 +17,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { RegisterComponent } from './components/register/register.component';
 import {HttpClientModule} from '@angular/common/http'
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminComponent } from './components/admin/admin.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import {MatTableModule} from '@angular/material/table'
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +32,8 @@ import { AdminComponent } from './components/admin/admin.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,10 +49,17 @@ import { AdminComponent } from './components/admin/admin.component';
     MatInputModule,
     HttpClientModule,
     FormsModule,
+    MatFormFieldModule,
     BrowserAnimationsModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatTableModule,
+    MatPaginatorModule,
     ToastrModule.forRoot(
 
     ),
+    
 
   ],
   providers: [],
