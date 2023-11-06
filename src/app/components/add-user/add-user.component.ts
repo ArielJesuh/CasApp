@@ -54,12 +54,12 @@ export class AddUserComponent implements OnInit{
 
   onFormSubmit(){
     if(this.userForm.valid){
-      if(this.data){
+      if(this.data.id != 0){
         this._userService.update(this.data.id,this.userForm.value)
         .subscribe({
           next:(val:any) => {
             this.toastr.success('Usuario Actualizado exitosamente','Actualizado')
-          
+            this.ngOnInit();
           }
         })
       }else{
@@ -71,14 +71,15 @@ export class AddUserComponent implements OnInit{
         } else{
           this._userService.register(this.userForm.value).subscribe(data => {
             this.toastr.success('Usuario registrado exitosamente','Registrado')
-            this.router.navigate(['/admin'])
+            this.ref.close()
 
           },error =>{
             this.toastr.error('El usuario ya existe.','Error')
-    
           })
         }
       }
+   } else{
+    this.toastr.error('El formulario debe rellenarse con datos validos.','Error')
    }
   }
 }
