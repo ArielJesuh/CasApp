@@ -149,37 +149,49 @@ export class MapComponent implements OnInit {
     this.formMapas.controls['direccion'].setValue(getAddressComp('route') + ' ' + getAddressComp('street_number'))
   };
 
-  cargarMapa(position: any): any {
-
+  cargarMapa(position: any): void {
     const opciones = {
       center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
       zoom: 17,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
-
-    this.mapa = new google.maps.Map(this.renderer.selectRootElement(this.divMap.nativeElement), opciones)
-
+  
+    this.mapa = new google.maps.Map(this.renderer.selectRootElement(this.divMap.nativeElement), opciones);
+  
+    // Define el icono personalizado
+    const customIcon = {
+      url: 'assets/protalinmobiliario.png', 
+      scaledSize: new google.maps.Size(100, 100)
+    };
+  
     const markerPosition = new google.maps.Marker({
       position: this.mapa.getCenter(),
-      title: "David",
+      title: 'Mi Ubicación',
+      icon: {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale: 10,
+        fillColor: 'blue',
+        fillOpacity: 1,
+        strokeColor: 'white',
+        strokeWeight: 2,
+      },
     });
-
+  
     markerPosition.setMap(this.mapa);
     this.markers.push(markerPosition);
-
+  
     google.maps.event.addListener(this.mapa, 'click', (evento: google.maps.MapMouseEvent) => {
       const marker = new google.maps.Marker({
         position: evento.latLng,
         animation: google.maps.Animation.DROP,
+        icon: customIcon 
       });
-      marker.setDraggable(true)
+      marker.setDraggable(true);
       marker.setMap(this.mapa);
-
-      google.maps.event.addListener(marker, 'click', (event) => { 
+  
+      google.maps.event.addListener(marker, 'click', (event) => {
         marker.setMap(null);
-        
-      })
-
-    })
-  };
+      });
+    });
+  }
 }
