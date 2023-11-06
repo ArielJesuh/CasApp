@@ -2,10 +2,10 @@
     <mat-sidenav [opened]="opened" mode="side" [class.close]="!opened">
         <mat-nav-list>
             <mat-list-item>
-                <div class="item">
-                    <button mat-icon-button>
+                <div class="item" routerLink="/login">
+                    <button mat-icon-button routerLink="/login">
                         <mat-icon>
-                            <span class="material-symbols-outlined">
+                            <span class="material-symbols-outlined" >
                                 map
                             </span>
                         </mat-icon>
@@ -14,8 +14,8 @@
                 </div>
             </mat-list-item>
             <mat-list-item>
-                <div class="item">
-                    <button mat-icon-button>
+                <div class="item" routerLink="/login">
+                    <button mat-icon-button routerLink="/login">
                         <mat-icon mat-list-icon>
                             <span class="material-symbols-outlined">
                                 favorite
@@ -25,8 +25,8 @@
                 </div>
             </mat-list-item>
             <mat-list-item>
-                <div class="item">
-                    <button mat-icon-button>
+                <div class="item" routerLink="/login">
+                    <button mat-icon-button routerLink="/login">
                         <mat-icon mat-list-icon>
                             <span class="material-symbols-outlined">
                                 compare_arrows
@@ -34,6 +34,18 @@
                         </mat-icon>
                     </button>
                     <a *ngIf="opened">Comparar</a>
+                </div>
+            </mat-list-item>
+            <mat-list-item>
+                <div class="item" routerLink="/admin">
+                    <button mat-icon-button routerLink="/admin">
+                        <mat-icon mat-list-icon>
+                            <span class="material-symbols-outlined">
+                                shield_person
+                                </span>
+                        </mat-icon>
+                    </button>
+                    <a *ngIf="opened">Admin</a>
                 </div>
             </mat-list-item>
         </mat-nav-list>
