@@ -26,9 +26,6 @@ import {MatTableModule} from '@angular/material/table'
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { MapComponent } from './map/map.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
 
@@ -43,7 +40,7 @@ import { MatSelectModule } from '@angular/material/select';
     RegisterComponent,
     AdminComponent,
     AddUserComponent,
-    HomeComponent,
+    
     MapComponent
   ],
   imports: [
