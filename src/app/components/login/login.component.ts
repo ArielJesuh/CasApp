@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UserService } from 'src/app/services/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'login-component',
@@ -10,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  helper = new JwtHelperService;
   hide = true;
   nombre_usuario: string =''
   contrasenia: string = ''
@@ -25,11 +27,10 @@ export class LoginComponent implements OnInit {
   login(){
     //Validar nulos
     if(this.nombre_usuario == '' || this.contrasenia=='' ){
-      console.log(this.nombre_usuario)
       this.toastr.error('Todos los campos deben estar completos.','Error')
       return;
     } 
-  //body usuario
+    //body usuario
     const usuario:Usuario = {
       contrasena:this.contrasenia,
       nombre_usuario:this.nombre_usuario,
@@ -41,8 +42,11 @@ export class LoginComponent implements OnInit {
     this._userService.login(usuario).subscribe({
       next:(token) =>
       {
+        const decodedToken = this.helper.decodeToken(token);
         this.router.navigate(['/'])
         localStorage.setItem('token', token)
+        sessionStorage.setItem('nombre_usuario',decodedToken.nombre_usuario)
+        sessionStorage.setItem('tipo',decodedToken.tipo)
       }
     })
   }

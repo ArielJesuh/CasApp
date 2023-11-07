@@ -27,6 +27,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import { MapComponent } from './map/map.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
+import { MetricasComponent } from './components/metricas/metricas.component';
 
 
 
@@ -41,7 +42,8 @@ import { MatSelectModule } from '@angular/material/select';
     AdminComponent,
     AddUserComponent,
     
-    MapComponent
+    MapComponent,
+          MetricasComponent
   ],
   imports: [
     BrowserModule,

@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 export class UserService {
   private myAppUrl: string;
   private myApiUrl:string;
-
   constructor(private http:HttpClient) { 
     this.myAppUrl=environment.endpoint;
     this.myApiUrl='api/usuarios'
@@ -38,4 +37,12 @@ export class UserService {
   getUserID(id:any){
     return this.http.get(`${this.myAppUrl}${this.myApiUrl}/${id}`)
   }
+
+  isLoggedIn(){
+    return localStorage.getItem('token')!=null;
+  }
+
+
+
+
 }

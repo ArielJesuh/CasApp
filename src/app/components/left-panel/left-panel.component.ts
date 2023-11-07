@@ -7,4 +7,35 @@ import { Component } from '@angular/core';
 })
 export class LeftPanelComponent {
   opened = true;
-}
+  tipo: any;
+
+  isAdmin():boolean{
+    this.tipo   = sessionStorage.getItem("tipo") ;
+    if(this.tipo == 0){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isUser():boolean{
+    this.tipo   = sessionStorage.getItem("tipo") ;
+    if(this.tipo == 1){
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  isInmobiliaria():boolean{
+    this.tipo   = sessionStorage.getItem("tipo") ;
+    if(this.tipo == 2){
+      return true;
+    } else {
+      return false;
+    }
+  }
+  }
+
+
+

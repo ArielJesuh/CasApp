@@ -13,7 +13,7 @@
                     <a routerLink="/map" *ngIf="opened">Mapa</a>
                 </div>
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="isUser()">
                 <div class="item" routerLink="/login">
                     <button mat-icon-button routerLink="/login">
                         <mat-icon mat-list-icon>
@@ -24,7 +24,7 @@
                     <a *ngIf="opened">Favoritos</a>
                 </div>
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="isUser()">
                 <div class="item" routerLink="/login">
                     <button mat-icon-button routerLink="/login">
                         <mat-icon mat-list-icon>
@@ -36,7 +36,19 @@
                     <a *ngIf="opened">Comparar</a>
                 </div>
             </mat-list-item>
-            <mat-list-item>
+            <mat-list-item *ngIf="isInmobiliaria()">
+                <div class="item" routerLink="/metricas">
+                    <button mat-icon-button routerLink="/metricas">
+                        <mat-icon mat-list-icon>
+                            <span class="material-symbols-outlined">
+                                trending_up
+                                </span>
+                        </mat-icon>
+                    </button>
+                    <a *ngIf="opened">Metricas</a>
+                </div>
+            </mat-list-item>
+            <mat-list-item *ngIf="isAdmin()">
                 <div class="item" routerLink="/admin">
                     <button mat-icon-button routerLink="/admin">
                         <mat-icon mat-list-icon>
