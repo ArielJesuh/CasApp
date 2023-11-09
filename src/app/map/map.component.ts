@@ -4,6 +4,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { ElementRef, ViewChild, Renderer2 } from '@angular/core'
+import { FiltroService } from '../services/filtro.service'
+import { Filtro } from '../interfaces/filtro';
+import { ViviendaService } from '../services/vivienda.service';
+import { Vivienda } from '../interfaces/vivienda';
 
 @Component({
   selector: 'app-map',
@@ -11,6 +15,7 @@ import { ElementRef, ViewChild, Renderer2 } from '@angular/core'
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
+  filtro: Filtro; 
 
   @ViewChild('divMap') divMap!: ElementRef;
   @ViewChild('inputPlaces') inputPlaces!: ElementRef;
@@ -22,13 +27,17 @@ export class MapComponent implements OnInit {
 
   regiones = new FormControl([]); 
   comunas = new FormControl([]); 
-  regionesList: string[] = ['Región Metropolitana', 'V Región'];
+  regionesList: { id: number, nombre: string }[] = [
+    { id: 7, nombre: 'Región Metropolitana' },
+  ];
+  
   comunasList: string[] = ['Puente Alto', 'La Florida', 'Macul', 'las Condes'];
   habitaciones: number = 1;
   banos: number = 1;
   valorMinUF = 10;
   valorMaxUF = 1000;
 
+  viviendasList: Vivienda[] = [];
 
   onToppingsSelectionChange(event: MatSelectChange) {
     this.comunas.setValue(event.value);
@@ -38,11 +47,17 @@ export class MapComponent implements OnInit {
     this.comunas.setValue(event.value);
   }
   
-  ngOnInit(): void {
-  }
-
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService) {
     this.markers = [];
+    
+    this.filtro = {
+      cantidad_habitaciones: 0,
+      cantidad_banos: 0,
+      min_valor: 0,
+      max_valor: 0,
+      comuna_id: 0,
+      usuario_id: 0
+    };
 
     this.formMapas = new FormGroup({
 
@@ -54,6 +69,39 @@ export class MapComponent implements OnInit {
       region: new FormControl('')
     })
   }
+  
+  ngOnInit(): void {
+    console.log(sessionStorage.getItem("id"))
+    const userId = 1;
+    this.filtroService.getFiltroByUsuario(userId).subscribe(
+      (filtroData: any) => { 
+        if (filtroData) {
+          this.filtro = {
+            cantidad_habitaciones: filtroData.cantidad_habitaciones,
+            cantidad_banos: filtroData.cantidad_banos,
+            max_valor: filtroData.max_valor,
+            min_valor: filtroData.min_valor,
+            comuna_id: filtroData.comuna_id,
+            usuario_id: filtroData.usuario_id
+          };
+          console.log('Filtro del usuario:', this.filtro);
+        } else {
+          console.log('La respuesta del servidor es nula');
+        }
+      },
+      (error) => {
+        console.error('Error al obtener el filtro del usuario', error);
+      }
+    );
+
+    this.getListViviendas()
+  }
+  
+  getListViviendas(){
+    this.viviendaService.getListViviendas().subscribe((data: Vivienda[]) => {
+      this.viviendasList = data;
+    }
+  )}
 
   ngAfterViewInit(): void {
 
@@ -194,4 +242,6 @@ export class MapComponent implements OnInit {
       });
     });
   }
+
 }
+

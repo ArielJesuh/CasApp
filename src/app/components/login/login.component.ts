@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   nombre_usuario: string =''
   contrasenia: string = ''
+  helper = new JwtHelperService
 
   constructor(private toastr: ToastrService,
     private _userService: UserService,
@@ -46,6 +47,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/'])
         localStorage.setItem('token', token)
         sessionStorage.setItem('nombre_usuario',decodedToken.nombre_usuario)
+        sessionStorage.setItem('id', decodedToken.id)
         sessionStorage.setItem('tipo',decodedToken.tipo)
       }
     })
