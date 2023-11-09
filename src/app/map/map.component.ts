@@ -80,6 +80,7 @@ export class MapComponent implements OnInit {
       (filtroData: any) => { 
         if (filtroData) {
           this.filtro = {
+            id: filtroData.id,
             cantidad_habitaciones: filtroData.cantidad_habitaciones,
             cantidad_banos: filtroData.cantidad_banos,
             max_valor: filtroData.max_valor,
@@ -99,6 +100,7 @@ export class MapComponent implements OnInit {
 
     this.getListViviendas()
     this.getListComunas()
+    this.mapearViviendas()
   }
   
   getListViviendas(){
@@ -106,6 +108,13 @@ export class MapComponent implements OnInit {
       this.viviendasList = data;
     }
   )}
+
+  mapearViviendas(){
+    this.viviendaService.getListViviendas().subscribe((data: Vivienda[]) => {
+      this.viviendasList = data;
+    }
+  )}
+
 
   getListComunas(){
     this.comunaService.getListComunas().subscribe((data: Comuna[]) => {
@@ -117,9 +126,50 @@ export class MapComponent implements OnInit {
     this.filtroService.createFiltro(this.filtro).subscribe(
       (respuesta) => {
         this.toastr.success('Usuario registrado exitosamente','Registrado')
+        this.filtroService.getFiltroByUsuario(this.filtro.usuario_id_usuario).subscribe(
+          (filtroData: any) => { 
+            if (filtroData) {
+              this.filtro = {
+                id: filtroData.id,
+                cantidad_habitaciones: filtroData.cantidad_habitaciones,
+                cantidad_banos: filtroData.cantidad_banos,
+                max_valor: filtroData.max_valor,
+                min_valor: filtroData.min_valor,
+                comuna_id_comuna: filtroData.comuna_id_comuna,
+                usuario_id_usuario: filtroData.usuario_id_usuario
+              };
+              console.log('Filtro del usuario:', this.filtro);
+            } else {
+              console.log('La respuesta del servidor es nula');
+            }
+          },
+          (error) => {
+            console.error('Error al obtener el filtro del usuario', error);
+          }
+        );
       },
       (error) => {
-        this.toastr.error('Error al guardar el filro','Error')
+        this.toastr.error('Error al guardar el filtro','Error')
+      }
+    );
+  }
+
+  borrarFiltro() {
+    var filtroId = this.filtro.id ?? 0;
+    this.filtro = {
+      id: undefined,
+      cantidad_habitaciones: 0,
+      cantidad_banos: 0,
+      max_valor: 0,
+      min_valor: 0,
+      comuna_id_comuna: undefined,
+      usuario_id_usuario: this.filtro.usuario_id_usuario
+    };
+    this.filtroService.deleteFiltro(filtroId).subscribe(
+      (respuesta) => {
+        this.toastr.success('Filtro Eliminado','Registrado')
+      },
+      (error) => {
       }
     );
   }

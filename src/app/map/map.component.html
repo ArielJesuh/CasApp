@@ -16,7 +16,7 @@
         </mat-expansion-panel-header>
         <div *ngIf="filtro" class="row">
           <div class="col-2">
-            <mat-form-field>
+            <mat-form-field style="width: 100%;">
               <mat-label>Región:</mat-label>
               <mat-select [formControl]="regiones" (selectionChange)="onRegionSelectionChange($event)">
                 <mat-option *ngFor="let region of regionesList; let i = index" [value]="region.id">{{region.nombre}}</mat-option>
@@ -31,15 +31,15 @@
               </mat-select>
             </mat-form-field>
           </div>
-          <div class="col-2">
+          <div class="col-1">
             <!-- Campo de entrada "Habitaciones" -->
             <label for="habitaciones" class="col-form-label text-right">Habitaciones:</label>
-            <input type="number" class="form-control" style="width: 50px;" [(ngModel)]="filtro.cantidad_habitaciones" name="habitaciones" [min]="0">
+            <input type="number" class="form-control" style="width: 100%;" [(ngModel)]="filtro.cantidad_habitaciones" name="habitaciones" [min]="0">
           </div>
-          <div class="col-2">
+          <div class="col-1">
             <!-- Campo de entrada "Baños" -->
             <label for="banos" class="col-form-label text-right">Baños:</label>
-            <input type="number" class="form-control" [(ngModel)]="filtro.cantidad_banos" name="banos" [min]="0">
+            <input type="number" class="form-control" style="width: 100%;" [(ngModel)]="filtro.cantidad_banos" name="banos" [min]="0">
           </div>
           <div class="col-1">
             <!-- Campo de entrada "Valor Mínimo de UF" -->
@@ -53,11 +53,15 @@
           </div>
           <div class="col-1">
             <!-- Botón "Guardar Filtro" al lado derecho del campo "Habitaciones" -->
-            <button class="btn btn-primary" (click)="guardarFiltro()">Guardar Filtro</button>
+            <button class="btn btn-primary" style="width: 80%;"(click)="guardarFiltro()">Guardar</button>
           </div>
           <div class="col-1">
+            <!-- Botón "Guardar Filtro" al lado derecho del campo "Habitaciones" -->
+            <button class="btn btn-dark" style="width: 80%;"(click)="borrarFiltro()">Limpiar</button>
+          </div>
+          <div class="col-2">
             <!-- Botón "Guardar" al lado derecho del campo "Baños" -->
-            <button class="btn btn-primary">Buscar</button>
+            <button class="btn btn-success" style="width: 80%;">Buscar</button>
           </div>
         </div>
       </mat-expansion-panel>
