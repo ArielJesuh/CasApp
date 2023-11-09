@@ -13,12 +13,9 @@ const routes: Routes = [
   {path : 'register', component : RegisterComponent },
   {path : 'admin', component : AdminComponent },
   {path : 'metricas', component : MetricasComponent },
+  {path : 'map', component : MapComponent},
 
   {path : '**', redirectTo:'login',pathMatch:'full' },
-
-
-  {path : 'map', component : MapComponent}
-
 
 ];
 

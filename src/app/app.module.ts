@@ -28,6 +28,7 @@ import { MapComponent } from './map/map.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MetricasComponent } from './components/metricas/metricas.component';
+import { PowerBIEmbedModule } from 'powerbi-client-angular';
 
 
 
@@ -66,6 +67,7 @@ import { MetricasComponent } from './components/metricas/metricas.component';
     ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
+    PowerBIEmbedModule,
     ToastrModule.forRoot(
 
     ),
