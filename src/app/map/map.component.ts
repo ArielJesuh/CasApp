@@ -6,6 +6,8 @@ import { MatSelectChange } from '@angular/material/select';
 import { ElementRef, ViewChild, Renderer2 } from '@angular/core'
 import { FiltroService } from '../services/filtro.service'
 import { Filtro } from '../interfaces/filtro';
+import { ViviendaService } from '../services/vivienda.service';
+import { Vivienda } from '../interfaces/vivienda';
 
 @Component({
   selector: 'app-map',
@@ -35,6 +37,7 @@ export class MapComponent implements OnInit {
   valorMinUF = 10;
   valorMaxUF = 1000;
 
+  viviendasList: Vivienda[] = [];
 
   onToppingsSelectionChange(event: MatSelectChange) {
     this.comunas.setValue(event.value);
@@ -44,7 +47,7 @@ export class MapComponent implements OnInit {
     this.comunas.setValue(event.value);
   }
   
-  constructor(private renderer: Renderer2, private filtroService: FiltroService) {
+  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService) {
     this.markers = [];
     
     this.filtro = {
@@ -68,7 +71,8 @@ export class MapComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    const userId = 1; // Reemplaza con el ID de usuario adecuado
+    console.log(sessionStorage.getItem("id"))
+    const userId = 1;
     this.filtroService.getFiltroByUsuario(userId).subscribe(
       (filtroData: any) => { 
         if (filtroData) {
@@ -89,8 +93,15 @@ export class MapComponent implements OnInit {
         console.error('Error al obtener el filtro del usuario', error);
       }
     );
+
+    this.getListViviendas()
   }
   
+  getListViviendas(){
+    this.viviendaService.getListViviendas().subscribe((data: Vivienda[]) => {
+      this.viviendasList = data;
+    }
+  )}
 
   ngAfterViewInit(): void {
 

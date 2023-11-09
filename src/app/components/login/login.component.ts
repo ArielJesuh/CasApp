@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UserService } from 'src/app/services/user.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'login-component',
@@ -13,6 +14,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   nombre_usuario: string =''
   contrasenia: string = ''
+  helper = new JwtHelperService
 
   constructor(private toastr: ToastrService,
     private _userService: UserService,
@@ -41,8 +43,12 @@ export class LoginComponent implements OnInit {
     this._userService.login(usuario).subscribe({
       next:(token) =>
       {
+        const decodedToken = this.helper.decodeToken(token);
         this.router.navigate(['/'])
         localStorage.setItem('token', token)
+        sessionStorage.setItem('nombre_usuario',decodedToken.nombre_usuario)
+        sessionStorage.setItem('id', decodedToken.id)
+        sessionStorage.setItem('tipo',decodedToken.tipo)
       }
     })
   }
