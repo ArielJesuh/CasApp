@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   hide = true;
   nombre_usuario: string =''
   contrasenia: string = ''
-  helper = new JwtHelperService
 
   constructor(private toastr: ToastrService,
     private _userService: UserService,
