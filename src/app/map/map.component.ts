@@ -8,6 +8,9 @@ import { FiltroService } from '../services/filtro.service'
 import { Filtro } from '../interfaces/filtro';
 import { ViviendaService } from '../services/vivienda.service';
 import { Vivienda } from '../interfaces/vivienda';
+import { ComunaService } from '../services/comuna.service';
+import { Comuna } from '../interfaces/comuna';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-map',
@@ -31,13 +34,13 @@ export class MapComponent implements OnInit {
     { id: 7, nombre: 'Región Metropolitana' },
   ];
   
-  comunasList: string[] = ['Puente Alto', 'La Florida', 'Macul', 'las Condes'];
   habitaciones: number = 1;
   banos: number = 1;
   valorMinUF = 10;
   valorMaxUF = 1000;
 
   viviendasList: Vivienda[] = [];
+  comunasList: Comuna[] = [];
 
   onToppingsSelectionChange(event: MatSelectChange) {
     this.comunas.setValue(event.value);
@@ -47,7 +50,7 @@ export class MapComponent implements OnInit {
     this.comunas.setValue(event.value);
   }
   
-  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService) {
+  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService, private comunaService: ComunaService,  private toastr:ToastrService) {
     this.markers = [];
     
     this.filtro = {
@@ -55,8 +58,8 @@ export class MapComponent implements OnInit {
       cantidad_banos: 0,
       min_valor: 0,
       max_valor: 0,
-      comuna_id: 0,
-      usuario_id: 0
+      comuna_id_comuna: 0,
+      usuario_id_usuario: 0
     };
 
     this.formMapas = new FormGroup({
@@ -71,9 +74,9 @@ export class MapComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    console.log(sessionStorage.getItem("id"))
-    const userId = 1;
-    this.filtroService.getFiltroByUsuario(userId).subscribe(
+    var userId = sessionStorage.getItem("id") ?? '0';
+    this.filtro.usuario_id_usuario = parseInt(userId, 10);
+    this.filtroService.getFiltroByUsuario(this.filtro.usuario_id_usuario).subscribe(
       (filtroData: any) => { 
         if (filtroData) {
           this.filtro = {
@@ -81,8 +84,8 @@ export class MapComponent implements OnInit {
             cantidad_banos: filtroData.cantidad_banos,
             max_valor: filtroData.max_valor,
             min_valor: filtroData.min_valor,
-            comuna_id: filtroData.comuna_id,
-            usuario_id: filtroData.usuario_id
+            comuna_id_comuna: filtroData.comuna_id_comuna,
+            usuario_id_usuario: filtroData.usuario_id_usuario
           };
           console.log('Filtro del usuario:', this.filtro);
         } else {
@@ -95,6 +98,7 @@ export class MapComponent implements OnInit {
     );
 
     this.getListViviendas()
+    this.getListComunas()
   }
   
   getListViviendas(){
@@ -102,6 +106,23 @@ export class MapComponent implements OnInit {
       this.viviendasList = data;
     }
   )}
+
+  getListComunas(){
+    this.comunaService.getListComunas().subscribe((data: Comuna[]) => {
+      this.comunasList = data;
+    }
+  )}
+
+  guardarFiltro() {
+    this.filtroService.createFiltro(this.filtro).subscribe(
+      (respuesta) => {
+        this.toastr.success('Usuario registrado exitosamente','Registrado')
+      },
+      (error) => {
+        this.toastr.error('Error al guardar el filro','Error')
+      }
+    );
+  }
 
   ngAfterViewInit(): void {
 

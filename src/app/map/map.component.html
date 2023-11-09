@@ -26,34 +26,34 @@
           <div class="col-2">
             <mat-form-field style="width: 100%;">
               <mat-label>Comuna(s)</mat-label>
-              <mat-select [formControl]="comunas" (selectionChange)="onToppingsSelectionChange($event)">
-                <mat-option *ngFor="let comuna of comunasList" [value]="filtro.comuna_id">{{filtro.comuna_id}}</mat-option>
+              <mat-select [(ngModel)]="filtro.comuna_id_comuna">
+                <mat-option *ngFor="let comuna of comunasList" [value]="comuna.id">{{ comuna.nombre_comuna }}</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="col-2">
             <!-- Campo de entrada "Habitaciones" -->
             <label for="habitaciones" class="col-form-label text-right">Habitaciones:</label>
-            <input type="number" class="form-control" style="width: 50px;" [(ngModel)]="filtro.cantidad_habitaciones" name="habitaciones">
+            <input type="number" class="form-control" style="width: 50px;" [(ngModel)]="filtro.cantidad_habitaciones" name="habitaciones" [min]="0">
           </div>
           <div class="col-2">
             <!-- Campo de entrada "Baños" -->
             <label for="banos" class="col-form-label text-right">Baños:</label>
-            <input type="number" class="form-control" [(ngModel)]="filtro.cantidad_banos" name="banos">
+            <input type="number" class="form-control" [(ngModel)]="filtro.cantidad_banos" name="banos" [min]="0">
           </div>
           <div class="col-1">
             <!-- Campo de entrada "Valor Mínimo de UF" -->
             <label for="valorMinUF" class="col-form-label text-right">Valor Mínimo de UF:</label>
-            <input type="number" class="form-control" [(ngModel)]="filtro.min_valor" name="valorMinUF">
+            <input type="number" class="form-control" [(ngModel)]="filtro.min_valor" name="valorMinUF" [min]="0">
           </div>
           <div class="col-1">
             <!-- Campo de entrada "Valor Máximo de UF" -->
             <label for ="valorMaxUF" class="col-form-label text-right">Valor Máximo de UF:</label>
-            <input type="number" class="form-control" [(ngModel)]="filtro.max_valor" name="valorMaxUF">
+            <input type="number" class="form-control" [(ngModel)]="filtro.max_valor" name="valorMaxUF" [min]="0">
           </div>
           <div class="col-1">
             <!-- Botón "Guardar Filtro" al lado derecho del campo "Habitaciones" -->
-            <button class="btn btn-primary">Guardar Filtro</button>
+            <button class="btn btn-primary" (click)="guardarFiltro()">Guardar Filtro</button>
           </div>
           <div class="col-1">
             <!-- Botón "Guardar" al lado derecho del campo "Baños" -->
@@ -78,13 +78,15 @@
                 <div class="mapa" #divMap style="width: 100%; height: 800px;"></div>
             </div>
             <div class="col-2">
-              <h1>Viviendas</h1>
+              <div style="text-align: center;">
+                <h1>Viviendas</h1>
+              </div>
               <div class="card-container">
                 <div class="card" *ngFor="let vivienda of viviendasList">
-                  <img class="card-img-top" src="https://www.iaconcagua.com/Multimedia/modelos/16569.w740.jpg" alt="Card image cap">
+                  <img class="card-img-top" src="{{vivienda.url_imagen}}" alt="Card image cap">
                   <div class="card-body">
                     <h2 class="card-title">{{ vivienda.direccion }}</h2>
-                    <p class="card-text">{{ vivienda.comuna_id_comuna}}</p>
+                    <h3 class="card-text">{{ vivienda.comuna.nombre_comuna}}</h3>
                     <p class="card-text">{{ vivienda.cantidad_habitaciones }} Habitaciones</p>
                     <p class="card-text">{{ vivienda.cantidad_banos }} Baños</p>
                   </div>
