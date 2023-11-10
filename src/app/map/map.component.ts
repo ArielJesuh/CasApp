@@ -121,9 +121,12 @@ export class MapComponent implements OnInit {
   
 
   guardarFiltro() {
+    if(this.filtro.comuna_id_comuna == 0){
+      this.filtro.comuna_id_comuna = undefined;
+    }
     this.filtroService.createFiltro(this.filtro).subscribe(
       (respuesta) => {
-        this.toastr.success('Usuario registrado exitosamente','Registrado')
+        this.toastr.success('Filtro guardado','Registrado')
         this.filtroService.getFiltroByUsuario(this.filtro.usuario_id_usuario).subscribe(
           (filtroData: any) => { 
             if (filtroData) {
