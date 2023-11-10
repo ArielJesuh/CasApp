@@ -41,15 +41,8 @@ export class MapComponent implements OnInit {
 
   viviendasList: Vivienda[] = [];
   comunasList: Comuna[] = [];
+  addressList: string[] = [];
 
-  onToppingsSelectionChange(event: MatSelectChange) {
-    this.comunas.setValue(event.value);
-  }
-
-  onRegionSelectionChange(event: MatSelectChange) {
-    this.comunas.setValue(event.value);
-  }
-  
   constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService, private comunaService: ComunaService,  private toastr:ToastrService) {
     this.markers = [];
     
@@ -98,29 +91,34 @@ export class MapComponent implements OnInit {
       }
     );
 
-    this.getListViviendas()
     this.getListComunas()
-    this.mapearViviendas()
+    this.getListViviendas();
+    console.log(this.addressList)
   }
   
+  //FILTRO
   getListViviendas(){
     this.viviendaService.getListViviendas().subscribe((data: Vivienda[]) => {
       this.viviendasList = data;
     }
   )}
 
-  mapearViviendas(){
-    this.viviendaService.getListViviendas().subscribe((data: Vivienda[]) => {
-      this.viviendasList = data;
-    }
-  )}
-
-
   getListComunas(){
     this.comunaService.getListComunas().subscribe((data: Comuna[]) => {
       this.comunasList = data;
     }
   )}
+
+  
+  onToppingsSelectionChange(event: MatSelectChange) {
+    this.comunas.setValue(event.value);
+  }
+
+  onRegionSelectionChange(event: MatSelectChange) {
+    this.comunas.setValue(event.value);
+  }
+  
+  
 
   guardarFiltro() {
     this.filtroService.createFiltro(this.filtro).subscribe(
@@ -174,6 +172,7 @@ export class MapComponent implements OnInit {
     );
   }
 
+  //MAPA
   ngAfterViewInit(): void {
 
     const opciones = {
@@ -185,89 +184,17 @@ export class MapComponent implements OnInit {
     if (navigator.geolocation) {
 
       navigator.geolocation.getCurrentPosition(async (position) => {
-
         await this.cargarMapa(position);
-        this.cargarAutocomplete();
-
       }, null, opciones);
-
-
     } else {
       console.log("navegador no compatible")
     }
-
   };
 
   onSubmit() {
     console.log("Datos del formulario: ", this.formMapas.value)
   };
   
-  private cargarAutocomplete() {
-
-    // const autocomplete = new google.maps.places.Autocomplete(this.renderer.selectRootElement(this.inputPlaces.nativeElement), { })
-
-    const autocomplete = new google.maps.places.Autocomplete(this.renderer.selectRootElement(this.inputPlaces.nativeElement), {
-      componentRestrictions: {
-        country: ["CL"]
-      },
-      fields: ["address_components", "geometry", "place_id"],
-      types: ["address"],
-    })
-
-
-    google.maps.event.addListener(autocomplete, 'place_changed', () => {
-      const place: any = autocomplete.getPlace();
-      console.log("el place completo es:", place)
-
-      this.mapa.setCenter(place.geometry.location);
-      const marker = new google.maps.Marker({
-        position: place.geometry.location
-      });
-
-      marker.setMap(this.mapa);
-      this.llenarFormulario(place);
-    })
-  }
-
-  llenarFormulario(place: any) {
-
-    console.log(place)
-    const addressNameFormat: any = {
-      'street_number': 'short_name',
-      'route': 'long_name',
-      'administrative_area_level_1': 'short_name',
-      'administrative_area_level_2': 'short_name',
-      'administrative_area_level_3': 'short_name',
-      'country': 'long_name',
-
-    };
-
-    const getAddressComp = (type: any) => {
-      for (const component of place.address_components) {
-        if (component.types[0] === type) {
-
-          return component[addressNameFormat[type]];
-        }
-      }
-      return ' '
-    };
-
-    const componentForm = {
-      direccion: 'location',
-      ciudad: "administrative_area_level_3",
-      provincia: 'administrative_area_level_2',
-      region: 'administrative_area_level_1'
-    };
-
-    Object.entries(componentForm).forEach(entry => {
-      const [key, value] = entry;
-
-      this.formMapas.controls[key].setValue(getAddressComp(value))
-    });
-
-    this.formMapas.controls['direccion'].setValue(getAddressComp('route') + ' ' + getAddressComp('street_number'))
-  };
-
   cargarMapa(position: any): void {
     const opciones = {
       center: new google.maps.LatLng(position.coords.latitude, position.coords.longitude),
@@ -276,13 +203,7 @@ export class MapComponent implements OnInit {
     };
   
     this.mapa = new google.maps.Map(this.renderer.selectRootElement(this.divMap.nativeElement), opciones);
-  
-    // Define el icono personalizado
-    const customIcon = {
-      url: 'assets/protalinmobiliario.png', 
-      scaledSize: new google.maps.Size(100, 100)
-    };
-  
+    this.mapa.setZoom(14);
     const markerPosition = new google.maps.Marker({
       position: this.mapa.getCenter(),
       title: 'Mi Ubicación',
@@ -298,21 +219,70 @@ export class MapComponent implements OnInit {
   
     markerPosition.setMap(this.mapa);
     this.markers.push(markerPosition);
-  
-    google.maps.event.addListener(this.mapa, 'click', (evento: google.maps.MapMouseEvent) => {
-      const marker = new google.maps.Marker({
-        position: evento.latLng,
-        animation: google.maps.Animation.DROP,
-        icon: customIcon 
+    this.mapearViviendas();
+  }
+
+  addMarker(vivienda: Vivienda) {
+
+    const customIcon = {
+      url: 'assets/protalinmobiliario.png', 
+      scaledSize: new google.maps.Size(100, 100)
+    };
+    const geocoder = new google.maps.Geocoder();
+    var address = vivienda.direccion +','+ vivienda.comuna.nombre_comuna;
+    geocoder.geocode({ address }, (results, status) => {
+      if (status === 'OK' && results[0]) {
+        const marker = new google.maps.Marker({
+          map: this.mapa,
+          position: results[0].geometry.location,
+          title: address,
+          icon: customIcon,
+          label: {
+            text: vivienda.valor_uf + 'UF',
+            color: 'black',
+            fontWeight: 'bold'
+          },
+        });
+
+      // Crear una infowindow con contenido personalizado
+      const infowindow = new google.maps.InfoWindow({
+        content: `
+        <div style="width: 200x; height: 300px; background-color: white;">
+          <img class="card-img-top" src="${vivienda.url_imagen}" alt="" width="100%" height= "100px;">
+          <div style="text-align: center;">
+            <h2>${vivienda.direccion}</h2>
+            <h3>${vivienda.comuna.nombre_comuna}</h3>
+            <h4>${vivienda.cantidad_habitaciones} Habitaciones</h4>
+            <h4>${vivienda.cantidad_banos} Baños</h4>
+            <a type="button">
+              <img src="../assets/not-fav.png" alt="Imagen" width="20" height="20">
+            </a>  
+            <button style="background:#343a40; color: white;" onclick="tuFuncion()">Ver Más</button>
+          </div>
+        </div>
+        `,
       });
-      marker.setDraggable(true);
-      marker.setMap(this.mapa);
-  
-      google.maps.event.addListener(marker, 'click', (event) => {
-        marker.setMap(null);
+
+      marker.addListener('mouseover', () => {
+        infowindow.open(this.mapa, marker);
       });
+
+      marker.addListener('mouseout', () => {
+        setTimeout(() => {
+          infowindow.close();
+        }, 6000); 
+      });
+      
+
+        this.markers.push(marker);
+      } else {
+        console.error('Geocoding failed for address: ' + address);
+      }
     });
   }
 
+  mapearViviendas(){
+    this.viviendasList.forEach(vivienda => this.addMarker(vivienda));
+  }
 }
 

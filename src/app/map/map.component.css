@@ -103,6 +103,18 @@ body {
 }
 
 .card {
-  flex: 0 0 calc(55%); /* Ajusta el ancho de las tarjetas según tus necesidades. */
-  margin: 10px; /* Espacio entre las tarjetas. */
+  flex: 0 0 calc(55%);
+  margin: 10px; 
+}
+
+.label-map{
+  line-height: 40px;
+}
+
+.fav{
+  background-color: red; 
+  border-radius: 50%; 
+  display: inline-block; 
+  padding: 10px; height: 80%; 
+  margin-top: 2%;
 }
