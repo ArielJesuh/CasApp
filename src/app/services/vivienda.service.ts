@@ -23,4 +23,10 @@ export class ViviendaService {
   getListViviendas(): Observable<Vivienda[]> {
     return this.http.get<Vivienda[]>(`${this.myAppUrl}${this.myApiUrl}`)
   }
+
+  
+  deleteVivienda(id:number):Observable<any>{
+    return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+  }
+
 }

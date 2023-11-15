@@ -30,6 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MetricasComponent } from './components/metricas/metricas.component';
 import { CloseSessionComponent } from './components/close-session/close-session.component';
 import { AdminVivComponent } from './components/admin-viv/admin-viv.component';
+import { AddViviendaComponent } from './components/add-vivienda/add-vivienda.component';
 
 
 
@@ -47,7 +48,8 @@ import { AdminVivComponent } from './components/admin-viv/admin-viv.component';
     MapComponent,
           MetricasComponent,
           CloseSessionComponent,
-          AdminVivComponent
+          AdminVivComponent,
+          AddViviendaComponent
   ],
   imports: [
     BrowserModule,

@@ -57,7 +57,19 @@
                                 </span>
                         </mat-icon>
                     </button>
-                    <a *ngIf="opened">Admin</a>
+                    <a *ngIf="opened">Admin Usuarios</a>
+                </div>
+            </mat-list-item>
+            <mat-list-item *ngIf="isAdmin()">
+                <div class="item" routerLink="/admin-viv">
+                    <button mat-icon-button routerLink="/admin-viv">
+                        <mat-icon mat-list-icon>
+                            <span class="material-symbols-outlined">
+                                shield_person
+                                </span>
+                        </mat-icon>
+                    </button>
+                    <a *ngIf="opened">Admin Viviendas</a>
                 </div>
             </mat-list-item>
         </mat-nav-list>
