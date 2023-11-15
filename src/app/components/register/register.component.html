@@ -1,20 +1,41 @@
 <div class="wrapper">
-    <form class="example-form">
-        <h1>Registrarse</h1>
-        <mat-form-field >
-          <mat-label>Nombre de usuario</mat-label>
-          <input matInput [(ngModel)]="nombre_usuario"  name="nombre_usuario">
-        </mat-form-field>
-        <mat-form-field >
-            <mat-label>Correo</mat-label>
-            <input matInput [(ngModel)]="correo" name="correo">
-          </mat-form-field>
-        <mat-form-field >
-            <mat-label>Contraseña</mat-label>
-            <input type="password" matInput [(ngModel)]="contrasenia" name="contrasenia">
-          </mat-form-field>
-          <div class="button-row">
-          <button class = "register-btn" mat-raised-button color="primary" (click)="addUser()">Registrarse</button>
-        </div>
-        </form>
+  <form class="example-form">
+    <h1>Registrarse</h1>
+    <mat-form-field>
+      <mat-label>Nombre de usuario</mat-label>
+      <input matInput [(ngModel)]="nombre_usuario" name="nombre_usuario">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input type="password" matInput [(ngModel)]="contrasenia" name="contrasenia">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [(ngModel)]="correo" name="correo">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Run</mat-label>
+      <input  matInput [(ngModel)]="run" name="run">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Telefono</mat-label>
+      <input  matInput [(ngModel)]="telefono" name="telefono">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tipo Usuario</mat-label>
+      <mat-select  [(ngModel)]="tipo" name = "tipo">
+        <mat-option  [value]="1">Usuario Común</mat-option>
+        <mat-option  [value]="2">Inmobiliaria</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="button-row">
+      <button class="register-btn" mat-raised-button color="primary" (click)="addUser()">Registrarse</button>
+    </div>
+  </form>
 </div>

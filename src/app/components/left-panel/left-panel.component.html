@@ -1,9 +1,9 @@
 <mat-sidenav-container>
     <mat-sidenav [opened]="opened" mode="side" [class.close]="!opened">
         <mat-nav-list>
-            <mat-list-item>
-                <div class="item" routerLink="/login">
-                    <button mat-icon-button routerLink="/login">
+            <mat-list-item *ngIf="isLoggedIn()">
+                <div class="item" routerLink="/map">
+                    <button mat-icon-button routerLink="/map">
                         <mat-icon>
                             <span class="material-symbols-outlined" >
                                 map

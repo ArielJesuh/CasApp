@@ -65,6 +65,13 @@ align-self:center ;
   display: flex;
   justify-content: center;
 }
+
+.botonesInicio{
+  display: flex;
+  margin-left: auto;
+  flex-direction: row;
+}
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 

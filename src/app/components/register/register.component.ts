@@ -14,6 +14,9 @@ export class RegisterComponent implements OnInit{
   nombre_usuario:string='';
   contrasenia:string='';
   correo:string='';
+  run:string='';
+  telefono:number=0;
+  tipo:number=0;
 
   constructor(private toastr:ToastrService,
     private _userService : UserService
@@ -36,9 +39,9 @@ export class RegisterComponent implements OnInit{
         contrasena:this.contrasenia,
         nombre_usuario:this.nombre_usuario,
         email:this.correo,
-        telefono:1,
-        tipo:1,
-        run:"1"
+        telefono:this.telefono,
+        tipo:Number(this.tipo),
+        run:this.run,
       }
 
       

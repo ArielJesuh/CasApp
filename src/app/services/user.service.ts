@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../interfaces/usuario'
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
+import { of } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -26,8 +28,15 @@ export class UserService {
     return this.http.put(`${this.myAppUrl}${this.myApiUrl}/${id}`,user)
   }
 
-  login(user:Usuario):Observable<string> {
-    return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`,user)
+  login(user:Usuario):Observable<any> {
+    return this.http.post<string>(`${this.myAppUrl}${this.myApiUrl}/login`,user).pipe(
+      catchError((error) => {
+        console.error('Error al iniciar sesion:',error);
+        return of(null);
+      })
+    )
+    
+    
   }
 
   deleteUser(id:number):Observable<any>{

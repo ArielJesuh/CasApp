@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit ,ViewChild} from '@angular/core';
+import { Component, OnInit ,ViewChild} from '@angular/core';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { UserService } from 'src/app/services/user.service';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import {  MatDialog } from '@angular/material/dialog';
 import { AddUserComponent } from '../add-user/add-user.component';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';

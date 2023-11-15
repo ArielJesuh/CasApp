@@ -28,6 +28,8 @@ import { MapComponent } from './map/map.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MetricasComponent } from './components/metricas/metricas.component';
+import { CloseSessionComponent } from './components/close-session/close-session.component';
+import { AdminVivComponent } from './components/admin-viv/admin-viv.component';
 
 
 
@@ -43,7 +45,9 @@ import { MetricasComponent } from './components/metricas/metricas.component';
     AddUserComponent,
     
     MapComponent,
-          MetricasComponent
+          MetricasComponent,
+          CloseSessionComponent,
+          AdminVivComponent
   ],
   imports: [
     BrowserModule,
