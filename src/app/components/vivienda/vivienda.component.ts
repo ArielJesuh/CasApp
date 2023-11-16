@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { Favorita } from 'src/app/interfaces/favorita';
 import { Vivienda } from 'src/app/interfaces/vivienda';
+import { FavoritaService } from 'src/app/services/favorita.service';
 import { ModalMeInteresaService } from 'src/app/services/modal.me-interesa.service';
 import { ViviendaService } from 'src/app/services/vivienda.service';
 
@@ -18,7 +20,7 @@ export class ViviendaComponent  implements OnInit{
   mapa: any;
   @ViewChild('divMap') divMap!: ElementRef;
 
-  constructor(private route: ActivatedRoute, private viviendaService: ViviendaService,public dialog: MatDialog, private renderer: Renderer2, private modalService: ModalMeInteresaService) {
+  constructor(private route: ActivatedRoute, private viviendaService: ViviendaService,public dialog: MatDialog, private renderer: Renderer2, private modalService: ModalMeInteresaService, private favService: FavoritaService) {
     this.route.params.subscribe(params => {
       this.viviendaId = params['id'];
     });
@@ -122,5 +124,24 @@ export class ViviendaComponent  implements OnInit{
     this.modalService.openModal(parametro ?? 0).subscribe(result => {
       console.log('Modal cerrado', result);
     });
+  }
+
+  favoritaVivienda(viviendaId: number) {
+    var userId = sessionStorage.getItem("id") ?? '0';
+
+    const nuevaFavorita: Favorita = {
+      usuario_id_usuario: parseInt(userId, 10),
+      vivienda_id_vivienda: viviendaId,
+    };
+
+    this.favService.register(nuevaFavorita).subscribe(
+      (response) => {
+        console.log('Vivienda agregada a favoritas:', response);
+        // Puedes agregar lógica adicional después de agregar a favoritas si es necesario
+      },
+      (error) => {
+        console.error('Error al agregar vivienda a favoritas:', error);
+      }
+    );
   }
 }

@@ -273,6 +273,7 @@ export class MapComponent implements OnInit {
             <p>${vivienda.cantidad_banos} Baños</p>
             <button style="margin-left: 5%;" class="btn btn-dark" id="verMasButton">Ver Más</button>
             <button style="margin-left: 5%; margin-top: 2%" class="btn btn-primary" id="compararViviendaButton">Comparar</button>
+            <button style="margin-left: 10px;" class="btn btn-danger" id="addFavButton">Agregar a Favorita</button>
           </div>
         </div>
         `,
@@ -290,6 +291,12 @@ export class MapComponent implements OnInit {
         if (button2) {
           button2.addEventListener('click', () => this.compararVivienda(vivienda ?? null));
         }
+        const button3 = document.getElementById('addFavButton');
+        if (button3) {
+          button3.addEventListener('click', () => this.favoritaVivienda(vivienda.id ?? 0));
+        }
+        
+
       });
 
       
