@@ -28,6 +28,9 @@ import { MapComponent } from './map/map.component';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { MetricasComponent } from './components/metricas/metricas.component';
+import { ViviendaComponent } from './components/vivienda/vivienda.component';
+import { ModalMeInteresaComponent } from './components/modal-me-interesa/modal-me-interesa.component';
+import { BarraCompararComponent } from './components/barra-comparar/barra-comparar.component';
 
 
 
@@ -41,9 +44,11 @@ import { MetricasComponent } from './components/metricas/metricas.component';
     RegisterComponent,
     AdminComponent,
     AddUserComponent,
-    
     MapComponent,
-          MetricasComponent
+          MetricasComponent,
+          ViviendaComponent,
+          ModalMeInteresaComponent,
+          BarraCompararComponent,
   ],
   imports: [
     BrowserModule,
