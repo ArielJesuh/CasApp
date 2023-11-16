@@ -25,10 +25,8 @@ ngOnInit() {
   }
 }
 
-quitarVivienda1() {
+quitarViviendas() {
   this.vivienda1 = null;
-}
-quitarVivienda2() {
   this.vivienda2 = null;
 }
 

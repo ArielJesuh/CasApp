@@ -1,49 +1,67 @@
-<!-- Contenedor flex para las tarjetas -->
-<div style="display: flex;">
-
-  <!-- Tarjeta para vivienda1 o texto si no hay vivienda1 -->
-  <div *ngIf="vivienda1; else textoVivienda1" class="card" style="width: 40%; margin-right: 10px;">
+<div style="display: flex; width: 80%; margin: 0 auto; text-align: center;">
+  <div *ngIf="vivienda1 && vivienda2; else textoVivienda1" class="card" style="flex: 1; margin-right: 10px;">
     <img class="card-img-top" [src]="vivienda1.url_imagen" alt="Card image cap" style="width: 100%;">
     <div class="card-body">
-      <h5 class="card-title">{{ vivienda1.direccion }}</h5>
-      <p class="card-text">{{ vivienda1.comuna.nombre_comuna}}</p>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{ vivienda1.valor_uf }} UF</li>
-        <!-- Agrega más elementos de la vivienda1 según sea necesario -->
-      </ul>
-      <div class="card-body">
-        <button class="btn btn-danger" (click)="quitarVivienda1()">Quitar vivienda</button>
-      </div>
+      <h2>{{ vivienda1.direccion }}</h2>
+      <p>
+        {{ vivienda1.cantidad_habitaciones }} Habitaciones
+        <span *ngIf="vivienda1.cantidad_habitaciones > vivienda2.cantidad_habitaciones" style="color: green;">&#x25B2;</span>
+        <span *ngIf="vivienda1.cantidad_habitaciones < vivienda2.cantidad_habitaciones" style="color: red;">&#x25BC;</span>
+      </p>
+      <p>
+        {{ vivienda1.cantidad_banos }} Baños
+        <span *ngIf="vivienda1.cantidad_banos > vivienda2.cantidad_banos" style="color: green;">&#x25B2;</span>
+        <span *ngIf="vivienda1.cantidad_banos < vivienda2.cantidad_banos" style="color: red;">&#x25BC;</span>
+      </p>
+      <p>
+        {{ vivienda1.metros_cuadrados }} m²
+        <span *ngIf="vivienda1.metros_cuadrados > vivienda2.metros_cuadrados" style="color: green;">&#x25B2;</span>
+        <span *ngIf="vivienda1.metros_cuadrados < vivienda2.metros_cuadrados" style="color: red;">&#x25BC;</span>
+      </p>
+      <p>
+        {{ vivienda1.valor_uf }} UF
+        <span *ngIf="vivienda1.valor_uf > vivienda2.valor_uf" style="color: green;">&#x25B2;</span>
+        <span *ngIf="vivienda1.valor_uf < vivienda2.valor_uf" style="color: red;">&#x25BC;</span>
+      </p>
+      <p>{{ vivienda1.descripcion }}</p>
     </div>
   </div>
 
-  <!-- Tarjeta para vivienda2 o texto si no hay vivienda2 -->
-  <div *ngIf="vivienda2; else textoVivienda2" class="card" style="width: 40%;">
+  <div *ngIf="vivienda2 && vivienda1; else textoVivienda1" class="card" style="flex: 1;">
     <img class="card-img-top" [src]="vivienda2.url_imagen" alt="Card image cap" style="width: 100%;">
     <div class="card-body">
-      <h5 class="card-title">{{ vivienda2.direccion }}</h5>
-      <p class="card-text">{{ vivienda2.comuna.nombre_comuna}}</p>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">{{ vivienda2.valor_uf }} UF</li>
-        <!-- Agrega más elementos de la vivienda2 según sea necesario -->
-      </ul>
-      <div class="card-body">
-        <button class="btn btn-danger" (click)="quitarVivienda2()">Quitar vivienda</button>
-      </div>
+      <h2>{{ vivienda2.direccion }}</h2>
+      <p>
+        {{ vivienda2.cantidad_habitaciones }} Habitaciones
+        <span *ngIf="vivienda2.cantidad_habitaciones > vivienda1.cantidad_habitaciones" style="color: green;">&#x25B2;</span>
+        <span *ngIf="vivienda2.cantidad_habitaciones < vivienda1.cantidad_habitaciones" style="color: red;">&#x25BC;</span>
+      </p>
+      <p>
+        {{ vivienda2.cantidad_banos }} Baños
+        <span *ngIf="vivienda2.cantidad_banos > vivienda1.cantidad_banos" style="color: green;">&#x25B2;</span>
+        <span *ngIf="vivienda2.cantidad_banos < vivienda1.cantidad_banos" style="color: red;">&#x25BC;</span>
+      </p>
+      <p>
+        {{ vivienda2.metros_cuadrados }} m²
+        <span *ngIf="vivienda2.metros_cuadrados > vivienda1.metros_cuadrados" style="color: green;">&#x25B2;</span>
+        <span *ngIf="vivienda2.metros_cuadrados< vivienda1.metros_cuadrados" style="color: red;">&#x25BC;</span>
+      </p>
+      <p>
+        {{ vivienda2.valor_uf }} UF
+        <span *ngIf="vivienda2.valor_uf > vivienda1.valor_uf" style="color: green;">&#x25B2;</span>
+        <span *ngIf="vivienda2.valor_uf < vivienda1.valor_uf" style="color: red;">&#x25BC;</span>
+      </p>
+      <p>{{ vivienda2.descripcion }}</p>
     </div>
   </div>
-
+</div>
+<div>
+  <button class="btn btn-danger" (click)="quitarViviendas()" *ngIf="vivienda1 && vivienda2">Quitar viviendas</button>
 </div>
 
 <ng-template #textoVivienda1>
-  <div class="text-container" style="margin-top: 75%;">
-    <p>Añadir vivienda para comparar</p>
-  </div>
-</ng-template>
-
-<ng-template #textoVivienda2>
-  <div class="text-container" style="margin-top: 45%;">
-    <p>Añadir vivienda para comparar</p>
+  <div class="text-container" style="flex: 1; margin-top: 5%;">
+    <p>Añadir viviendas para comparar</p>
   </div>
 </ng-template>
 
