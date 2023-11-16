@@ -1,9 +1,10 @@
 <div class="m-2">
   <h1>Escribe un mensaje al inmobiliario</h1>
-  <textarea class="form-control" id="exampleTextarea" rows="5" placeholder="Ingresa texto aquí"></textarea>
+  <textarea class="form-control" id="exampleTextarea" rows="5" [(ngModel)]="contenidoCorreo" placeholder="Ingresa texto aquí"></textarea>
 
   <div class="mt-2">
-    <button class="btn btn-dark">Enviar Correo Electrónico</button>
+    <!-- Abre Gmail en el navegador con el correo prellenado -->
+    <a [href]="generarEnlaceGmail()" class="btn btn-dark" target="_blank" rel="noopener noreferrer">Enviar Correo Electrónico</a>
     <mat-icon style="margin-left: 1%;">
       <span class="material-icons-outlined">
         mail
@@ -11,19 +12,19 @@
     </mat-icon>
   </div>
   <h2>Datos inmobiliario</h2>
-<div class="d-flex flex-column align-items-start">
-  <div class="d-flex align-items-center">
-    <mat-icon>
-      <span class="material-icons-outlined">
-        phone
-      </span>
-    </mat-icon>
-    <h3 class="ml-2">{{ usuario.telefono }}</h3>
+  <div class="d-flex flex-column align-items-start">
+    <div class="d-flex align-items-center">
+      <mat-icon>
+        <span class="material-icons-outlined">
+          phone
+        </span>
+      </mat-icon>
+      <h3 class="ml-2">{{ usuario.telefono }}</h3>
+    </div>
+    <p>Run: {{ usuario.run }}</p>
+    <p>Email: {{ usuario.email }}</p>
+    <p>Nombre: {{ nombre }}</p>
   </div>
-  <p>Run: {{ usuario.run }}</p>
-  <p>Email: {{ usuario.email }}</p>
-  <p>Nombre: {{ nombre }}</p>
+
+  <button class="btn btn-secondary" style="margin-left: 88%;" (click)="closeModal()">Cerrar</button>
 </div>
-
-
-<button class="btn btn-secondary" style="margin-left: 88%;" (click)="closeModal()">Cerrar</button>
