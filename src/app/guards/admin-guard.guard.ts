@@ -22,7 +22,7 @@ export class AdminGuard {
       }
     } else if (userType === '1') {
 
-      const permisos = ['map','home','comparar','favoritos','profile','vivienda/:id']
+      const permisos = ['map','home','comparar','favoritos','profile','vivienda/:id','favoritos']
       const ruta = route.routeConfig?.path; // Obtener la ruta a la que intenta acceder el usuario
       if (ruta && permisos.includes(ruta)) {
         console.log("El Usuario puede acceder")

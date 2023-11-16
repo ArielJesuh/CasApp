@@ -1,0 +1,38 @@
+<!-- favoritos.component.html -->
+<div class="container mt-4">
+    <h1 class="text-center">Viviendas Favoritas</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Habitaciones</th>
+                <th scope="col">Baños</th>
+                <th scope="col">Metros Cuadrados</th>
+                <th scope="col">Valor UF</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let vivienda of viviendas; let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ vivienda.direccion }}</td>
+                <td>{{ vivienda.cantidad_habitaciones }}</td>
+                <td>{{ vivienda.cantidad_banos }}</td>
+                <td>{{ vivienda.metros_cuadrados }}</td>
+                <td>{{ vivienda.valor_uf }}</td>
+                <td>{{ vivienda.descripcion }}</td>
+                <td><img [src]="vivienda.url_imagen" alt="Imagen de la vivienda" style="max-width: 100px;"></td>
+                <td>
+                    <!-- Botones utilizando clases de Bootstrap -->
+                    <button type="button" class="btn btn-primary m-2">Comparar</button>
+                    <button type="button" class="btn btn-dark m-2">Ver más</button>
+                    <button type="button" class="btn btn-danger m-2">Eliminar de favoritos</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
