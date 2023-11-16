@@ -3,9 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Inmobiliario } from 'src/app/interfaces/Inmobiliario';
 import { Favorita } from 'src/app/interfaces/favorita';
+import { Usuario } from 'src/app/interfaces/usuario';
 import { Vivienda } from 'src/app/interfaces/vivienda';
 import { FavoritaService } from 'src/app/services/favorita.service';
 import { ModalMeInteresaService } from 'src/app/services/modal.me-interesa.service';
+import { UserService } from 'src/app/services/user.service';
 import { ViviendaService } from 'src/app/services/vivienda.service';
 
 declare const google: any; 
@@ -18,11 +20,12 @@ declare const google: any;
 export class ViviendaComponent  implements OnInit{
   vivienda: Vivienda;
   inmobiliario: Inmobiliario;
+  usuario: Usuario;
   viviendaId = 0; 
   mapa: any;
   @ViewChild('divMap') divMap!: ElementRef;
 
-  constructor(private route: ActivatedRoute, private viviendaService: ViviendaService,public dialog: MatDialog, private renderer: Renderer2, private modalService: ModalMeInteresaService, private favService: FavoritaService) {
+  constructor(private route: ActivatedRoute, private viviendaService: ViviendaService,public dialog: MatDialog, private renderer: Renderer2, private modalService: ModalMeInteresaService, private favService: FavoritaService, private userService: UserService) {
     this.route.params.subscribe(params => {
       this.viviendaId = params['id'];
     });
@@ -62,6 +65,16 @@ export class ViviendaComponent  implements OnInit{
         usuario_id_usuario: 0
       }
     }
+
+    this.usuario = {
+      id: 0,
+      nombre_usuario:'',
+      contrasena: '',
+      email:'',
+      run:'',
+      telefono:0,
+      tipo:0
+    }
   }
   
   ngOnInit(): void {
@@ -73,18 +86,25 @@ export class ViviendaComponent  implements OnInit{
           this.vivienda = data;
           this.initStreetView(this.vivienda);
           this.cargarMapa(this.vivienda);
-
-          // Llamar al método getInmobiliario dentro del bloque subscribe de getViviendaID
+  
           this.viviendaService.getInmobiliario(this.vivienda.inmobiliario_id_inmobiliario).subscribe(
             (data2: Inmobiliario) => {
               this.inmobiliario = data2;
+              this.userService.getUserID(this.inmobiliario.inmobiliario.usuario_id_usuario).subscribe(
+                (data3: any) => {
+                  this.usuario = data3;
+                },
+                (error: any) => {
+                  console.error('Error al obtener datos del usuario:', error);
+                }
+              );
             },
-            error => {
+            (error: any) => {
               console.error('Error al obtener datos del inmobiliario:', error);
             }
           );
         },
-        error => {
+        (error: any) => {
           console.error('Error al obtener la vivienda por ID:', error);
         }
       );
@@ -92,6 +112,7 @@ export class ViviendaComponent  implements OnInit{
       console.error('ID de vivienda no definido');
     }
   }
+  
 
   initStreetView(vivienda: Vivienda) {
     const geocoder = new google.maps.Geocoder();
@@ -149,7 +170,7 @@ export class ViviendaComponent  implements OnInit{
   }  
 
   abrirModal(): void {   
-    this.modalService.openModal(this.inmobiliario).subscribe(result => {
+    this.modalService.openModal(this.usuario, this.inmobiliario.inmobiliario.nombre).subscribe(result => {
       console.log('Modal cerrado', result);
     });
   }

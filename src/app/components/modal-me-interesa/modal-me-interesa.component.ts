@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Inmobiliario } from 'src/app/interfaces/Inmobiliario';
+import { Usuario } from 'src/app/interfaces/usuario';
 
 @Component({
   selector: 'app-modal-me-interesa',
@@ -8,13 +9,15 @@ import { Inmobiliario } from 'src/app/interfaces/Inmobiliario';
   styleUrls: ['./modal-me-interesa.component.css']
 })
 export class ModalMeInteresaComponent {
-  inmobiliario: Inmobiliario;
+  usuario: Usuario;
+  nombre: string;
 
   constructor(
     public dialogRef: MatDialogRef<ModalMeInteresaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.inmobiliario = data.inmobiliario;
+    this.usuario = data.usuario;
+    this.nombre = data.nombre;
   }
 
   closeModal(): void {

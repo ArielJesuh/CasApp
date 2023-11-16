@@ -10,16 +10,20 @@
       </span>
     </mat-icon>
   </div>
-
-  <h3 class="mt-3">O contáctalo por teléfono</h3>
+  <h2>Datos inmobiliario</h2>
+<div class="d-flex flex-column align-items-start">
   <div class="d-flex align-items-center">
     <mat-icon>
       <span class="material-icons-outlined">
         phone
       </span>
     </mat-icon>
-    <h3 class="ml-2">{{ inmobiliario.inmobiliario_id_inmobiliario}}</h3>
+    <h3 class="ml-2">{{ usuario.telefono }}</h3>
   </div>
+  <p>Run: {{ usuario.run }}</p>
+  <p>Email: {{ usuario.email }}</p>
+  <p>Nombre: {{ nombre }}</p>
 </div>
+
 
 <button class="btn btn-secondary" style="margin-left: 88%;" (click)="closeModal()">Cerrar</button>
