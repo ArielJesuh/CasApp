@@ -11,16 +11,14 @@
         <p class="card-text">{{ vivienda.cantidad_banos }} Baños</p>
       </div>
       <div style="margin-left:10%; margin-bottom: 2%;">
-        <div class="botonesInicio" *ngIf="isDisconnected()">
+        <div class="botonesCard" *ngIf="isDisconnected()">
           <a type="button" id="{{vivienda.id}}">
-            <img src="../assets/not-fav.png"  alt="Imagen" width="20" height="20">
           </a>
           <button style="margin-left: 55%;" class="btn btn-dark" [routerLink]="['/login']">Ver
             Más</button>
         </div>
-        <div class="botonesInicio" *ngIf="isLoggedIn()">
+        <div class="botonesCard" *ngIf="isLoggedIn()">
           <a type="button" id="{{vivienda.id}}">
-            <img src="../assets/not-fav.png"  alt="Imagen" width="20" height="20">
           </a>
           <button style="margin-left: 55%;" class="btn btn-dark" [routerLink]="['/vivienda', vivienda.id]">Ver
             Más</button>

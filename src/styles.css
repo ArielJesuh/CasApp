@@ -72,6 +72,13 @@ align-self:center ;
   flex-direction: row;
 }
 
+.botonesCard{
+  display: flex;
+  text-align: center;
+  margin-right: 40%;
+}
+
+
 .forgotPassword{
   text-decoration-line: underline ;
   display: flex;

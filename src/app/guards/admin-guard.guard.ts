@@ -13,7 +13,7 @@ export class AdminGuard {
     const userType = sessionStorage.getItem('tipo') // Método para obtener el tipo de usuario
     if (userType === '0') {
 
-      const permisos = ['admin','home','map','admin-viv','profile']; // Método para obtener los permisos del usuario
+      const permisos = ['admin','home','map','admin-viv','profile','vivienda/:id','comparar']; // Método para obtener los permisos del usuario
       const ruta = route.routeConfig?.path; // Obtener la ruta a la que intenta acceder el usuario
       if (ruta && permisos.includes(ruta)) {
         console.log("El admin puede acceder")
