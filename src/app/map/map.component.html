@@ -18,15 +18,15 @@
           <div class="col-2">
             <mat-form-field style="width: 100%;">
               <mat-label>Región:</mat-label>
-              <mat-select [formControl]="regiones" (selectionChange)="onRegionSelectionChange($event)">
-                <mat-option *ngFor="let region of regionesList; let i = index" [value]="region.id">{{region.nombre}}</mat-option>
-              </mat-select>
+              <mat-select [formControl]="regiones" (selectionChange)="onRegionSelectionChange($event)" [(ngModel)]="regionSeleccionada">
+                <mat-option *ngFor="let region of regionesList; let i = index" [value]="region.id">{{ region.nombre_region }}</mat-option>
+              </mat-select>    
             </mat-form-field>
           </div>
           <div class="col-2">
             <mat-form-field style="width: 100%;">
               <mat-label>Comuna(s)</mat-label>
-              <mat-select [(ngModel)]="filtro.comuna_id_comuna">
+              <mat-select [(ngModel)]="filtro.comuna_id_comuna" [disabled]="selectDeshabilitado">
                 <mat-option *ngFor="let comuna of comunasList" [value]="comuna.id">{{ comuna.nombre_comuna }}</mat-option>
               </mat-select>
             </mat-form-field>
@@ -95,7 +95,8 @@
                     <a type="button" id="{{vivienda.id}}">
                       <img src="../assets/not-fav.png" alt="Imagen" width="20" height="20">
                     </a>           
-                    <button class="btn btn-dark" style="margin-bottom: 2%; margin-left: 50%;" href="#">Ver Más</button>
+                    <button  style="margin-left: 55%;" class="btn btn-dark" [routerLink]="['/vivienda', vivienda.id]">Ver Más</button>
+                    <button style="margin-left: 10px;" class="btn btn-primary" (click)="compararVivienda(vivienda)">Comparar</button>
                   </div>
                 </div>
               </div>

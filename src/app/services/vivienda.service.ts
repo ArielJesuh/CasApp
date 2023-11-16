@@ -17,7 +17,7 @@ export class ViviendaService {
   }
 
   getViviendaID(id:any){
-    return this.http.get(`${this.myAppUrl}${this.myApiUrl}/${id}`)
+    return this.http.get<Vivienda>(`${this.myAppUrl}${this.myApiUrl}/${id}`)
   }
 
   

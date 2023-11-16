@@ -35,6 +35,10 @@ import { GestionarViviendasComponent } from './components/gestionar-viviendas/ge
 import { ProfileComponent } from './components/profile/profile.component';
 import { RecuperarPassComponent } from './components/recuperar-pass/recuperar-pass.component';
 import { DialogRecoverPassComponent } from './components/dialog-recover-pass/dialog-recover-pass.component';
+import { ViviendaComponent } from './components/vivienda/vivienda.component';
+import { ModalMeInteresaComponent } from './components/modal-me-interesa/modal-me-interesa.component';
+import { BarraCompararComponent } from './components/barra-comparar/barra-comparar.component';
+import { CompararComponent } from './components/comparar/comparar.component';
 
 
 
@@ -48,7 +52,6 @@ import { DialogRecoverPassComponent } from './components/dialog-recover-pass/dia
     RegisterComponent,
     AdminComponent,
     AddUserComponent,
-    
     MapComponent,
           MetricasComponent,
           CloseSessionComponent,
@@ -58,6 +61,11 @@ import { DialogRecoverPassComponent } from './components/dialog-recover-pass/dia
           ProfileComponent,
           RecuperarPassComponent,
           DialogRecoverPassComponent
+          MetricasComponent,
+          ViviendaComponent,
+          ModalMeInteresaComponent,
+          BarraCompararComponent,
+          CompararComponent,
   ],
   imports: [
     BrowserModule,

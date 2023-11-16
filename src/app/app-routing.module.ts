@@ -11,6 +11,7 @@ import { GestionarViviendasComponent } from './components/gestionar-viviendas/ge
 import { ProfileComponent } from './components/profile/profile.component';
 import { RecuperarPassComponent } from './components/recuperar-pass/recuperar-pass.component';
 import { AdminGuard  } from './guards/admin-guard.guard';
+import { CompararComponent } from './components/comparar/comparar.component';
 
 const routes: Routes = [
   {path : 'home', component : HomeComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   {path : 'gestionar-viviendas', component : GestionarViviendasComponent,canActivate:[AdminGuard]},
   {path : 'profile', component : ProfileComponent,canActivate:[AdminGuard]},
   {path: 'recuperar-pass',component : RecuperarPassComponent},
+  {path : 'comparar', component: CompararComponent},
 
   {path : '**', redirectTo:'home',pathMatch:'full' },
 

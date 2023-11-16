@@ -11,6 +11,10 @@ import { Vivienda } from '../interfaces/vivienda';
 import { ComunaService } from '../services/comuna.service';
 import { Comuna } from '../interfaces/comuna';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { ComparacionService } from '../services/comparacion.service';
+import { Region } from '../interfaces/region';
+import { RegionService } from '../services/region.service';
 
 @Component({
   selector: 'app-map',
@@ -28,11 +32,10 @@ export class MapComponent implements OnInit {
   distancia!: string;
   formMapas!: FormGroup;
 
+  
   regiones = new FormControl([]); 
   comunas = new FormControl([]); 
-  regionesList: { id: number, nombre: string }[] = [
-    { id: 7, nombre: 'Región Metropolitana' },
-  ];
+
   
   habitaciones: number = 1;
   banos: number = 1;
@@ -42,10 +45,13 @@ export class MapComponent implements OnInit {
   viviendasList: Vivienda[] = [];
   comunasList: Comuna[] = [];
   addressList: string[] = [];
+  regionesList: Region [] = [];
+  selectDeshabilitado: boolean = true;
+  regionSeleccionada: number;  
 
-  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService, private comunaService: ComunaService,  private toastr:ToastrService) {
+  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService, private comunaService: ComunaService,  private toastr:ToastrService, private router: Router, private comparacionService: ComparacionService, private regionService: RegionService) {
     this.markers = [];
-    
+    this.regionSeleccionada = 0 ;
     this.filtro = {
       cantidad_habitaciones: 0,
       cantidad_banos: 0,
@@ -91,10 +97,9 @@ export class MapComponent implements OnInit {
         console.error('Error al obtener el filtro del usuario', error);
       }
     );
-
-    this.getListComunas()
+    
     this.getListViviendas();
-    console.log(this.addressList)
+    this.getListRegiones();
   }
   
   //FILTRO
@@ -103,20 +108,26 @@ export class MapComponent implements OnInit {
       this.viviendasList = data;
     }
   )}
-
-  getListComunas(){
-    this.comunaService.getListComunas().subscribe((data: Comuna[]) => {
-      this.comunasList = data;
+  
+  getListRegiones(){
+    this.regionService.getListRegiones().subscribe((data: Region[]) => {
+      this.regionesList = data;
     }
   )}
 
-  
   onToppingsSelectionChange(event: MatSelectChange) {
     this.comunas.setValue(event.value);
   }
 
   onRegionSelectionChange(event: MatSelectChange) {
-    this.comunas.setValue(event.value);
+    const idRegion = this.regionSeleccionada;
+
+    // Llama a getListComunas con el ID de la región
+    this.comunaService.getListComunas(idRegion).subscribe((data: Comuna[]) => {
+      this.comunasList = data;
+    });
+
+    this.selectDeshabilitado = false;
   }
   
   
@@ -251,17 +262,15 @@ export class MapComponent implements OnInit {
       // Crear una infowindow con contenido personalizado
       const infowindow = new google.maps.InfoWindow({
         content: `
-        <div style="width: 200x; height: 300px; background-color: white;">
+        <div style="width: 200px; height: 320px; background-color: white;">
           <img class="card-img-top" src="${vivienda.url_imagen}" alt="" width="100%" height= "100px;">
           <div style="text-align: center;">
-            <h2>${vivienda.direccion}</h2>
-            <h3>${vivienda.comuna.nombre_comuna}</h3>
-            <h4>${vivienda.cantidad_habitaciones} Habitaciones</h4>
-            <h4>${vivienda.cantidad_banos} Baños</h4>
-            <a type="button">
-              <img src="../assets/not-fav.png" alt="Imagen" width="20" height="20">
-            </a>  
-            <button style="background:#343a40; color: white;" onclick="tuFuncion()">Ver Más</button>
+            <h3>${vivienda.direccion}</h3>
+            <p>${vivienda.comuna.nombre_comuna}</p>
+            <p>${vivienda.cantidad_habitaciones} Habitaciones</p>
+            <p>${vivienda.cantidad_banos} Baños</p>
+            <button style="margin-left: 5%;" class="btn btn-dark" id="verMasButton">Ver Más</button>
+            <button style="margin-left: 5%; margin-top: 2%" class="btn btn-primary" id="compararViviendaButton">Comparar</button>
           </div>
         </div>
         `,
@@ -269,8 +278,19 @@ export class MapComponent implements OnInit {
 
       marker.addListener('mouseover', () => {
         infowindow.open(this.mapa, marker);
+    
+        // Agrega el evento de clic después de abrir el InfoWindow
+        const button = document.getElementById('verMasButton');
+        if (button) {
+          button.addEventListener('click', () => this.verMas(vivienda.id ?? 0));
+        }
+        const button2 = document.getElementById('compararViviendaButton');
+        if (button2) {
+          button2.addEventListener('click', () => this.compararVivienda(vivienda ?? null));
+        }
       });
 
+      
       marker.addListener('mouseout', () => {
         setTimeout(() => {
           infowindow.close();
@@ -287,6 +307,14 @@ export class MapComponent implements OnInit {
 
   mapearViviendas(){
     this.viviendasList.forEach(vivienda => this.addMarker(vivienda));
+  }
+
+  verMas(viviendaId: number): void {
+    this.router.navigate(['/vivienda', viviendaId]);
+  }
+  
+  compararVivienda(vivienda: Vivienda) {
+    this.comparacionService.compararVivienda(vivienda);
   }
 }
 

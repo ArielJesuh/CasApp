@@ -1,0 +1,31 @@
+/* sidebar.component.css */
+
+.sidebar {
+  width: 300px;
+  height: 100vh;
+  background-color: #e4e2e2;
+  color: black;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+  z-index: 2;
+}
+
+.sidebar.hidden {
+  transform: translateX(100%);
+}
+
+.toggle-button {
+  position: fixed;
+  top: 20px;
+  right: var(--button-right, 20px); 
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 3;
+}
