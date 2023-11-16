@@ -45,6 +45,7 @@ export class MapComponent implements OnInit {
   valorMaxUF = 1000;
 
   viviendasList: Vivienda[] = [];
+  viviendasListFiltred: Vivienda[] = [];
   comunasList: Comuna[] = [];
   addressList: string[] = [];
   regionesList: Region [] = [];
@@ -108,6 +109,7 @@ export class MapComponent implements OnInit {
   getListViviendas(){
     this.viviendaService.getListViviendas().subscribe((data: Vivienda[]) => {
       this.viviendasList = data;
+      this.viviendasListFiltred = data;
     }
   )}
   

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Inmobiliario } from 'src/app/interfaces/Inmobiliario';
+import { Inmobiliario } from 'src/app/interfaces/inmobiliario';
 import { Favorita } from 'src/app/interfaces/favorita';
 import { Usuario } from 'src/app/interfaces/usuario';
 import { Vivienda } from 'src/app/interfaces/vivienda';

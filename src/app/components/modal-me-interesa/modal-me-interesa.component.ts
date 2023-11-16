@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Inmobiliario } from 'src/app/interfaces/Inmobiliario';
 import { Usuario } from 'src/app/interfaces/usuario';
 
 @Component({

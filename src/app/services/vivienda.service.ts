@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Vivienda } from '../interfaces/vivienda';
-import { Inmobiliario } from '../interfaces/Inmobiliario';
+import { Inmobiliario } from '../interfaces/inmobiliario';
 
 @Injectable({
   providedIn: 'root',
