@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Comuna } from '../interfaces/comuna';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalMeInteresaComponent } from '../components/modal-me-interesa/modal-me-interesa.component';
+import { Inmobiliario } from '../interfaces/Inmobiliario';
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +19,11 @@ export class ModalMeInteresaService {
     this.myApiUrl='api/comunas'
   }
 
-  openModal(parametro: number): Observable<any> {
+  openModal(inmobiliario: Inmobiliario): Observable<any> {
     const dialogRef = this.dialog.open(ModalMeInteresaComponent, {
       width: '700px',
       height: '400px',
-      data: { parametro: parametro }
+      data: { inmobiliario: inmobiliario }
     });
     return dialogRef.afterClosed();
   }

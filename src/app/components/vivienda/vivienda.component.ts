@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { Inmobiliario } from 'src/app/interfaces/Inmobiliario';
 import { Favorita } from 'src/app/interfaces/favorita';
 import { Vivienda } from 'src/app/interfaces/vivienda';
 import { FavoritaService } from 'src/app/services/favorita.service';
@@ -16,6 +17,7 @@ declare const google: any;
 })
 export class ViviendaComponent  implements OnInit{
   vivienda: Vivienda;
+  inmobiliario: Inmobiliario;
   viviendaId = 0; 
   mapa: any;
   @ViewChild('divMap') divMap!: ElementRef;
@@ -42,6 +44,24 @@ export class ViviendaComponent  implements OnInit{
         region_id_region: 0
       }
     }
+
+    this.inmobiliario = {
+      id: 0,
+      direccion: '',
+      cantidad_habitaciones: 0,
+      cantidad_banos: 0,
+      metros_cuadrados: 0,
+      valor_uf: 0,
+      descripcion: '',
+      url_imagen: '',
+      comuna_id_comuna: 0,
+      inmobiliario_id_inmobiliario: 0,
+      inmobiliario: {
+        id: 0,
+        nombre: '',
+        usuario_id_usuario: 0
+      }
+    }
   }
   
   ngOnInit(): void {
@@ -53,6 +73,16 @@ export class ViviendaComponent  implements OnInit{
           this.vivienda = data;
           this.initStreetView(this.vivienda);
           this.cargarMapa(this.vivienda);
+
+          // Llamar al método getInmobiliario dentro del bloque subscribe de getViviendaID
+          this.viviendaService.getInmobiliario(this.vivienda.inmobiliario_id_inmobiliario).subscribe(
+            (data2: Inmobiliario) => {
+              this.inmobiliario = data2;
+            },
+            error => {
+              console.error('Error al obtener datos del inmobiliario:', error);
+            }
+          );
         },
         error => {
           console.error('Error al obtener la vivienda por ID:', error);
@@ -118,10 +148,8 @@ export class ViviendaComponent  implements OnInit{
     });
   }  
 
-  abrirModal(): void {
-    const parametro = this.vivienda.id;
-    
-    this.modalService.openModal(parametro ?? 0).subscribe(result => {
+  abrirModal(): void {   
+    this.modalService.openModal(this.inmobiliario).subscribe(result => {
       console.log('Modal cerrado', result);
     });
   }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { Vivienda } from '../interfaces/vivienda';
+import { Inmobiliario } from '../interfaces/Inmobiliario';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +28,10 @@ export class ViviendaService {
 
   getViviendasFav(id:number):Observable<Vivienda[]>{
     return this.http.get<Vivienda[]>(`${this.myAppUrl}${this.myApiUrl}/favs/${id}`)
+  }
+
+  getInmobiliario(id:number){
+    return this.http.get<Inmobiliario>(`${this.myAppUrl}${this.myApiUrl}/inmo/${id}`)
   }
 
   getListViviendas(): Observable<Vivienda[]> {
