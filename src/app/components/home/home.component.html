@@ -1,26 +1,30 @@
-<mat-card class="big-card" >
-    <h1>Bienvenido a CasApp</h1>
-    <h2>Aqui tenemos algunas viviendas destacadas!</h2>
-<div class="vivienda-card" >
-    <div class="vivienda-image">
-      <img src="../assets/casa1.webp" alt="Imagen de la vivienda" class="casa-img" />
+<mat-card class="big-card">
+  <h1>Bienvenido a CasApp</h1>
+  <h2>Aqui tenemos algunas viviendas destacadas!</h2>
+  <div class="card-container" style="width: auto;">
+    <div class="card" *ngFor="let vivienda of viviendasList.slice(0,3)">
+      <img class="card-img-top" src="{{vivienda.url_imagen}}" alt="Card image cap">
+      <div class="card-body">
+        <h2 class="card-title">{{ vivienda.direccion }}</h2>
+        <h3 class="card-text">{{ vivienda.comuna.nombre_comuna}}</h3>
+        <p class="card-text">{{ vivienda.cantidad_habitaciones }} Habitaciones</p>
+        <p class="card-text">{{ vivienda.cantidad_banos }} Baños</p>
+      </div>
+      <div style="margin-left:10%; margin-bottom: 2%;">
+        <div class="botonesInicio" *ngIf="isDisconnected()">
+          <a type="button" id="{{vivienda.id}}">
+            <img src="../assets/not-fav.png"  alt="Imagen" width="20" height="20">
+          </a>
+          <button style="margin-left: 55%;" class="btn btn-dark" [routerLink]="['/login']">Ver
+            Más</button>
+        </div>
+        <div class="botonesInicio" *ngIf="isLoggedIn()">
+          <a type="button" id="{{vivienda.id}}">
+            <img src="../assets/not-fav.png"  alt="Imagen" width="20" height="20">
+          </a>
+          <button style="margin-left: 55%;" class="btn btn-dark" [routerLink]="['/vivienda', vivienda.id]">Ver
+            Más</button>
+        </div>
+      </div>
     </div>
-    <mat-card class="vivienda-info"       >
-      <mat-card-content>
-        <h2>Estancia Santa Cruz</h2>
-        <p>Dirección: Bajos De Santa Cruz 1131, Padre Hurtado, RM (Metropolitana)</p>
-        <p>Precio: UF 2.890</p>
-        <div class="contenedor-botones-tarjeta">
-        <button mat-icon-button >
-        <mat-icon mat-list-icon>
-            <span class="material-symbols-outlined">
-                favorite
-            </span></mat-icon>
-        </button> 
-        <button mat-raised-button color="primary" class="boton-ver" >Ver</button> 
-    </div>
-      </mat-card-content>
-    </mat-card>
-</div>
-</mat-card>
-  
+    

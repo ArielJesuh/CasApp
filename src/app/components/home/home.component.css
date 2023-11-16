@@ -1,0 +1,26 @@
+.card-container {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    height: 60%;
+  }
+
+.img {
+    display: flex;
+    width: auto;
+    height: auto;
+}
+
+.card {
+    display: flex;
+    flex: wrap;
+    margin: 5px; 
+    width: auto;
+    height: auto;
+  }
+
+  .card-img-top{
+align-items: center;
+    width: auto;
+    height: auto;
+  }
