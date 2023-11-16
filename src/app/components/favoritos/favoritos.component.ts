@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Vivienda } from 'src/app/interfaces/vivienda';
+import { ComparacionService } from 'src/app/services/comparacion.service';
 import { FavoritaService } from 'src/app/services/favorita.service';
 import { ViviendaService } from 'src/app/services/vivienda.service';
 
@@ -12,7 +13,7 @@ import { ViviendaService } from 'src/app/services/vivienda.service';
 export class FavoritosComponent implements OnInit {
   @Input() viviendas: Vivienda[] = [];
 
-  constructor(private viviendaService: ViviendaService, private favoritaService: FavoritaService) { }
+  constructor(private viviendaService: ViviendaService, private favoritaService: FavoritaService, private comparacionService: ComparacionService) { }
 
   ngOnInit() {
     this.cargarViviendasFavoritas();
@@ -48,5 +49,9 @@ export class FavoritosComponent implements OnInit {
         console.error('Error al eliminar de favoritos:', error);
       }
     );
+  }
+
+  compararVivienda(vivienda: Vivienda) {
+    this.comparacionService.compararVivienda(vivienda);
   }
 }

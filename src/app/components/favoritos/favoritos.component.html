@@ -28,8 +28,8 @@
                 <td><img [src]="vivienda.url_imagen" alt="Imagen de la vivienda" style="max-width: 100px;"></td>
                 <td>
                     <!-- Botones utilizando clases de Bootstrap -->
-                    <button type="button" class="btn btn-primary m-2">Comparar</button>
-                    <button type="button" class="btn btn-dark m-2">Ver más</button>
+                    <button type="button" class="btn btn-primary m-2" (click)="compararVivienda(vivienda)">Comparar</button>
+                    <button type="button" class="btn btn-dark m-2" [routerLink]="['/vivienda', vivienda.id]">Ver Más</button>
                     <button type="button" class="btn btn-danger m-2" (click)="vivienda.id !== undefined && eliminarDeFavoritos(vivienda.id)">Eliminar de favoritos</button>
 
                 </td>
