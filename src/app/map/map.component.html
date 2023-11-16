@@ -18,15 +18,15 @@
           <div class="col-2">
             <mat-form-field style="width: 100%;">
               <mat-label>Región:</mat-label>
-              <mat-select [formControl]="regiones" (selectionChange)="onRegionSelectionChange($event)">
-                <mat-option *ngFor="let region of regionesList; let i = index" [value]="region.id">{{region.nombre}}</mat-option>
-              </mat-select>
+              <mat-select [formControl]="regiones" (selectionChange)="onRegionSelectionChange($event)" [(ngModel)]="regionSeleccionada">
+                <mat-option *ngFor="let region of regionesList; let i = index" [value]="region.id">{{ region.nombre_region }}</mat-option>
+              </mat-select>    
             </mat-form-field>
           </div>
           <div class="col-2">
             <mat-form-field style="width: 100%;">
               <mat-label>Comuna(s)</mat-label>
-              <mat-select [(ngModel)]="filtro.comuna_id_comuna">
+              <mat-select [(ngModel)]="filtro.comuna_id_comuna" [disabled]="selectDeshabilitado">
                 <mat-option *ngFor="let comuna of comunasList" [value]="comuna.id">{{ comuna.nombre_comuna }}</mat-option>
               </mat-select>
             </mat-form-field>

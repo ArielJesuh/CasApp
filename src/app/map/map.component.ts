@@ -13,6 +13,8 @@ import { Comuna } from '../interfaces/comuna';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ComparacionService } from '../services/comparacion.service';
+import { Region } from '../interfaces/region';
+import { RegionService } from '../services/region.service';
 
 @Component({
   selector: 'app-map',
@@ -33,9 +35,7 @@ export class MapComponent implements OnInit {
   
   regiones = new FormControl([]); 
   comunas = new FormControl([]); 
-  regionesList: { id: number, nombre: string }[] = [
-    { id: 7, nombre: 'Región Metropolitana' },
-  ];
+
   
   habitaciones: number = 1;
   banos: number = 1;
@@ -45,10 +45,13 @@ export class MapComponent implements OnInit {
   viviendasList: Vivienda[] = [];
   comunasList: Comuna[] = [];
   addressList: string[] = [];
+  regionesList: Region [] = [];
+  selectDeshabilitado: boolean = true;
+  regionSeleccionada: number;  
 
-  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService, private comunaService: ComunaService,  private toastr:ToastrService, private router: Router, private comparacionService: ComparacionService) {
+  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService, private comunaService: ComunaService,  private toastr:ToastrService, private router: Router, private comparacionService: ComparacionService, private regionService: RegionService) {
     this.markers = [];
-    
+    this.regionSeleccionada = 0 ;
     this.filtro = {
       cantidad_habitaciones: 0,
       cantidad_banos: 0,
@@ -93,10 +96,9 @@ export class MapComponent implements OnInit {
         console.error('Error al obtener el filtro del usuario', error);
       }
     );
-
-    this.getListComunas()
+    
     this.getListViviendas();
-    console.log(this.addressList)
+    this.getListRegiones();
   }
   
   //FILTRO
@@ -105,20 +107,26 @@ export class MapComponent implements OnInit {
       this.viviendasList = data;
     }
   )}
-
-  getListComunas(){
-    this.comunaService.getListComunas().subscribe((data: Comuna[]) => {
-      this.comunasList = data;
+  
+  getListRegiones(){
+    this.regionService.getListRegiones().subscribe((data: Region[]) => {
+      this.regionesList = data;
     }
   )}
 
-  
   onToppingsSelectionChange(event: MatSelectChange) {
     this.comunas.setValue(event.value);
   }
 
   onRegionSelectionChange(event: MatSelectChange) {
-    this.comunas.setValue(event.value);
+    const idRegion = this.regionSeleccionada;
+
+    // Llama a getListComunas con el ID de la región
+    this.comunaService.getListComunas(idRegion).subscribe((data: Comuna[]) => {
+      this.comunasList = data;
+    });
+
+    this.selectDeshabilitado = false;
   }
   
   
