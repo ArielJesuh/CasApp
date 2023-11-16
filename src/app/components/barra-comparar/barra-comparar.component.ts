@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class BarraCompararComponent implements OnInit {
   vivienda1: Vivienda | null;
   vivienda2: Vivienda | null;
-  isSidebarVisible = true;
+  isSidebarVisible = false;
   originalButtonRight: number;
 
   constructor(private comparacionService: ComparacionService, private router: Router) {

@@ -20,7 +20,7 @@
 
 .toggle-button {
   position: fixed;
-  top: 20px;
+  top: 8%;
   right: var(--button-right, 20px); 
   background-color: #333;
   color: white;
