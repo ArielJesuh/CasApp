@@ -1,0 +1,50 @@
+<!-- Contenedor flex para las tarjetas -->
+<div style="display: flex;">
+
+  <!-- Tarjeta para vivienda1 o texto si no hay vivienda1 -->
+  <div *ngIf="vivienda1; else textoVivienda1" class="card" style="width: 40%; margin-right: 10px;">
+    <img class="card-img-top" [src]="vivienda1.url_imagen" alt="Card image cap" style="width: 100%;">
+    <div class="card-body">
+      <h5 class="card-title">{{ vivienda1.direccion }}</h5>
+      <p class="card-text">{{ vivienda1.comuna.nombre_comuna}}</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{ vivienda1.valor_uf }} UF</li>
+        <!-- Agrega más elementos de la vivienda1 según sea necesario -->
+      </ul>
+      <div class="card-body">
+        <button class="btn btn-danger" (click)="quitarVivienda1()">Quitar vivienda</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tarjeta para vivienda2 o texto si no hay vivienda2 -->
+  <div *ngIf="vivienda2; else textoVivienda2" class="card" style="width: 40%;">
+    <img class="card-img-top" [src]="vivienda2.url_imagen" alt="Card image cap" style="width: 100%;">
+    <div class="card-body">
+      <h5 class="card-title">{{ vivienda2.direccion }}</h5>
+      <p class="card-text">{{ vivienda2.comuna.nombre_comuna}}</p>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{ vivienda2.valor_uf }} UF</li>
+        <!-- Agrega más elementos de la vivienda2 según sea necesario -->
+      </ul>
+      <div class="card-body">
+        <button class="btn btn-danger" (click)="quitarVivienda2()">Quitar vivienda</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #textoVivienda1>
+  <div class="text-container" style="margin-top: 75%;">
+    <p>Añadir vivienda para comparar</p>
+  </div>
+</ng-template>
+
+<ng-template #textoVivienda2>
+  <div class="text-container" style="margin-top: 45%;">
+    <p>Añadir vivienda para comparar</p>
+  </div>
+</ng-template>
+
+<hr style="margin: 20px 0; width: 100%;">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Vivienda } from 'src/app/interfaces/vivienda';
 import { ComparacionService } from 'src/app/services/comparacion.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-barra-comparar',
@@ -13,7 +15,7 @@ export class BarraCompararComponent implements OnInit {
   isSidebarVisible = true;
   originalButtonRight: number;
 
-  constructor(private comparacionService: ComparacionService) {
+  constructor(private comparacionService: ComparacionService, private router: Router) {
     this.vivienda1 = null;
     this.vivienda2 = null;
     this.originalButtonRight = window.innerWidth - 1900; 
@@ -40,4 +42,19 @@ export class BarraCompararComponent implements OnInit {
   quitarVivienda2() {
     this.vivienda2 = null;
   }
+
+  compararViviendas(vivienda1: Vivienda | null, vivienda2: Vivienda | null) {
+    if (vivienda1 && vivienda2) {
+      // Redirige a la ruta /comparar y pasa las viviendas como parte del objeto de navegación
+      const state = { vivienda1, vivienda2 };
+      const stateString = JSON.stringify(state);
+      this.router.navigate(['/comparar', { state: stateString }]);
+    } else {
+      console.error('Al menos una de las viviendas es null. No se puede comparar.');
+    }
+  }
+  
+  
+  
+  
 }

@@ -6,6 +6,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { MapComponent } from './map/map.component';
 import { MetricasComponent } from './components/metricas/metricas.component';
+import { CompararComponent } from './components/comparar/comparar.component';
 
 const routes: Routes = [
   {path : '', component : HomeComponent},
@@ -13,12 +14,11 @@ const routes: Routes = [
   {path : 'register', component : RegisterComponent },
   {path : 'admin', component : AdminComponent },
   {path : 'metricas', component : MetricasComponent },
+  {path : 'comparar', component: CompararComponent},
 
-  {path : '**', redirectTo:'login',pathMatch:'full' },
 
-
-  {path : 'map', component : MapComponent}
-
+  {path : 'map', component : MapComponent},
+  {path : '**', redirectTo:'login',pathMatch:'full' }
 
 ];
 

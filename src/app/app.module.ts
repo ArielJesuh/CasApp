@@ -31,6 +31,7 @@ import { MetricasComponent } from './components/metricas/metricas.component';
 import { ViviendaComponent } from './components/vivienda/vivienda.component';
 import { ModalMeInteresaComponent } from './components/modal-me-interesa/modal-me-interesa.component';
 import { BarraCompararComponent } from './components/barra-comparar/barra-comparar.component';
+import { CompararComponent } from './components/comparar/comparar.component';
 
 
 
@@ -49,6 +50,7 @@ import { BarraCompararComponent } from './components/barra-comparar/barra-compar
           ViviendaComponent,
           ModalMeInteresaComponent,
           BarraCompararComponent,
+          CompararComponent,
   ],
   imports: [
     BrowserModule,
