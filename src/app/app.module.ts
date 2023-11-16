@@ -31,6 +31,8 @@ import { MetricasComponent } from './components/metricas/metricas.component';
 import { CloseSessionComponent } from './components/close-session/close-session.component';
 import { AdminVivComponent } from './components/admin-viv/admin-viv.component';
 import { AddViviendaComponent } from './components/add-vivienda/add-vivienda.component';
+import { GestionarViviendasComponent } from './components/gestionar-viviendas/gestionar-viviendas.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 
@@ -49,7 +51,9 @@ import { AddViviendaComponent } from './components/add-vivienda/add-vivienda.com
           MetricasComponent,
           CloseSessionComponent,
           AdminVivComponent,
-          AddViviendaComponent
+          AddViviendaComponent,
+          GestionarViviendasComponent,
+          ProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { MapComponent } from './map/map.component';
 import { MetricasComponent } from './components/metricas/metricas.component';
 import { AdminVivComponent } from './components/admin-viv/admin-viv.component';
+import { GestionarViviendasComponent } from './components/gestionar-viviendas/gestionar-viviendas.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
   {path : '', component : HomeComponent},
@@ -16,6 +18,9 @@ const routes: Routes = [
   {path : 'metricas', component : MetricasComponent },
   {path : 'map', component : MapComponent},
   {path : 'admin-viv', component : AdminVivComponent},
+  {path : 'gestionar-viviendas', component : GestionarViviendasComponent},
+  {path : 'profile', component : ProfileComponent},
+
   {path : '**', redirectTo:'',pathMatch:'full' },
 
 

@@ -20,6 +20,11 @@ export class ViviendaService {
     return this.http.get(`${this.myAppUrl}${this.myApiUrl}/${id}`)
   }
 
+  
+  getViviendaInmo(id:any){
+    return this.http.get(`${this.myAppUrl}${this.myApiUrl}/inmo/${id}`)
+  }
+
   getListViviendas(): Observable<Vivienda[]> {
     return this.http.get<Vivienda[]>(`${this.myAppUrl}${this.myApiUrl}`)
   }

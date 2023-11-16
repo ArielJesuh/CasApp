@@ -72,6 +72,19 @@
                     <a *ngIf="opened">Admin Viviendas</a>
                 </div>
             </mat-list-item>
+            <mat-list-item *ngIf="isInmobiliaria()">
+                <div class="item" routerLink="/gestionar-viviendas">
+                    <button mat-icon-button routerLink="/gestionar-viviendas">
+                        <mat-icon mat-list-icon>
+                            <span class="material-symbols-outlined">
+                                subject
+                                </span>
+                        </mat-icon>
+                    </button>
+                    <a *ngIf="opened">Gestionar Viviendas</a>
+                </div>
+            </mat-list-item>
+
         </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content [class.close]="!opened">

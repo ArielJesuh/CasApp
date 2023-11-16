@@ -10,7 +10,8 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class HeaderComponent {
   token:any;
-  constructor(private dialog: MatDialog){    
+  constructor(private dialog: MatDialog
+   ){    
   }
 
   openDialog():void{
@@ -51,7 +52,7 @@ export class HeaderComponent {
       return true;
     }
   }
- 
+
  
  
 }

@@ -2,8 +2,7 @@
   <img src="../assets/protalinmobiliario.png" alt="Logo" class="logo">
   <h1>CasApp</h1>
     <div class="botonesInicio" *ngIf="isLoggedIn()">
-      <mat-icon >account_box</mat-icon>
-	    <mat-icon>settings</mat-icon>
+      <mat-icon routerLink="/profile" >account_box</mat-icon>
       <mat-icon (click)="openDialog()">power_settings_new</mat-icon>
     </div>
     <div class="botonesInicio" *ngIf="isDisconnected()">
