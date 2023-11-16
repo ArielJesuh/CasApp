@@ -9,6 +9,7 @@ import { MetricasComponent } from './components/metricas/metricas.component';
 import { AdminVivComponent } from './components/admin-viv/admin-viv.component';
 import { GestionarViviendasComponent } from './components/gestionar-viviendas/gestionar-viviendas.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { RecuperarPassComponent } from './components/recuperar-pass/recuperar-pass.component';
 
 const routes: Routes = [
   {path : '', component : HomeComponent},
@@ -20,6 +21,7 @@ const routes: Routes = [
   {path : 'admin-viv', component : AdminVivComponent},
   {path : 'gestionar-viviendas', component : GestionarViviendasComponent},
   {path : 'profile', component : ProfileComponent},
+  {path: 'recuperar-pass',component : RecuperarPassComponent},
 
   {path : '**', redirectTo:'',pathMatch:'full' },
 

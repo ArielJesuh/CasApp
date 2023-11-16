@@ -51,7 +51,9 @@ export class UserService {
     return localStorage.getItem('token')!=null;
   }
 
-
+  getUserRecover(nombre_usuario:any, run:any){
+    return this.http.get(`${this.myAppUrl}${this.myApiUrl}/${nombre_usuario}/${run}`)
+  }
 
 
 }

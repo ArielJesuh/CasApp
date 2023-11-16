@@ -1,0 +1,51 @@
+<div mat-dialog-title>
+    <p>Editar Usuario</p>
+</div>
+<form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+<div mat-dialog-content class="cont">
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Nombre de usuario</mat-label>
+            <input matInput type="text" formControlName="nombre_usuario">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="contrasena">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="test@gmail.com" formControlName="email">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Run</mat-label>
+            <input matInput formControlName="run">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Telefono</mat-label>
+            <input matInput placeholder="+569 12345678" formControlName="telefono" type="number">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Tipo Usuario</mat-label>
+            <input matInput formControlName="tipo" type="number">
+        </mat-form-field>
+    </div>
+</div>
+
+<div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" >Guardar</button>
+</div>
+</form>

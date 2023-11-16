@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { MatDialog} from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-close-session',
@@ -8,11 +8,14 @@ import { MatDialog} from '@angular/material/dialog';
   styleUrls: ['./close-session.component.css']
 })
 export class CloseSessionComponent {
-  constructor(public dialogRef: MatDialogRef<CloseSessionComponent>){
+  constructor(public dialogRef: MatDialogRef<CloseSessionComponent>,private toastr:ToastrService){
 
   }
 
   logOut():void{
     localStorage.clear();
+    sessionStorage.clear();
+    this.toastr.success('Sesión cerrada correctamente','LogOut')
+
   }
 }

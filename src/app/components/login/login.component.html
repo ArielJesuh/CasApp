@@ -1,20 +1,23 @@
 <div class="wrapper">
-    <form class="example-form">
-        <h1>Iniciar Sesion</h1>
-        <mat-form-field >
-          <mat-label>Nombre de usuario</mat-label>
-          <input matInput [(ngModel)] = "nombre_usuario" name="nombre_usuario">
-        </mat-form-field>
-        <mat-form-field >
-            <mat-label>Contraseña</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'"  [(ngModel)] = "contrasenia" name="contrasenia">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-          </mat-form-field>
-          <div class="button-row">
-          <button mat-raised-button color="primary" (click)="login()" mat-dialog-close>Iniciar Sesión</button>
-          <button class = "register-btn" mat-raised-button color="primary"  routerLink="/register" mat-dialog-close>Registrarse</button>
-        </div>
-        </form>
+  <form class="example-form">
+    <h1>Iniciar Sesion</h1>
+    <mat-form-field>
+      <mat-label>Nombre de usuario</mat-label>
+      <input matInput [(ngModel)]="nombre_usuario" name="nombre_usuario">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="contrasenia" name="contrasenia">
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="button-row">
+      <button mat-raised-button color="primary" (click)="login()" mat-dialog-close>Iniciar Sesión</button>
+      <button class="register-btn" mat-raised-button color="primary" routerLink="/register"
+        mat-dialog-close>Registrarse</button>
+    </div>
+    <button mat-button color="primary" class="forgotPassword" (click)="forgotPassword()" mat-dialog-close>Olvide mi Contraseña</button>
+  </form>
 </div>

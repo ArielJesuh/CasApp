@@ -33,6 +33,8 @@ import { AdminVivComponent } from './components/admin-viv/admin-viv.component';
 import { AddViviendaComponent } from './components/add-vivienda/add-vivienda.component';
 import { GestionarViviendasComponent } from './components/gestionar-viviendas/gestionar-viviendas.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { RecuperarPassComponent } from './components/recuperar-pass/recuperar-pass.component';
+import { DialogRecoverPassComponent } from './components/dialog-recover-pass/dialog-recover-pass.component';
 
 
 
@@ -53,7 +55,9 @@ import { ProfileComponent } from './components/profile/profile.component';
           AdminVivComponent,
           AddViviendaComponent,
           GestionarViviendasComponent,
-          ProfileComponent
+          ProfileComponent,
+          RecuperarPassComponent,
+          DialogRecoverPassComponent
   ],
   imports: [
     BrowserModule,

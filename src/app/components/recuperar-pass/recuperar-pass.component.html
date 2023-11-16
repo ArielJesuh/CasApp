@@ -1,0 +1,16 @@
+<div class="wrapper">
+<h1>Recuperar contraseña</h1>
+<mat-form-field>
+    <mat-label>Nombre de usuario</mat-label>
+    <input matInput [(ngModel)]="nombre_usuario" name="nombre_usuario">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Run</mat-label>
+    <input matInput [(ngModel)]="run" name="run">
+</mat-form-field>
+
+<div >
+    <button class="button" mat-raised-button color="primary" (click)="recuperar()">Recuperar</button>
+  </div>
+
+</div>

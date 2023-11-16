@@ -1,0 +1,10 @@
+.row{
+    display: flex;
+
+}
+
+.cont{
+    padding-top:5px;
+    height:auto;
+    width: auto;
+}
