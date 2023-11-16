@@ -60,7 +60,7 @@ import { CompararComponent } from './components/comparar/comparar.component';
           GestionarViviendasComponent,
           ProfileComponent,
           RecuperarPassComponent,
-          DialogRecoverPassComponent
+          DialogRecoverPassComponent,
           MetricasComponent,
           ViviendaComponent,
           ModalMeInteresaComponent,
