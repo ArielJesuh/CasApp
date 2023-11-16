@@ -10,20 +10,21 @@ import { AdminVivComponent } from './components/admin-viv/admin-viv.component';
 import { GestionarViviendasComponent } from './components/gestionar-viviendas/gestionar-viviendas.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RecuperarPassComponent } from './components/recuperar-pass/recuperar-pass.component';
+import { AdminGuard  } from './guards/admin-guard.guard';
 
 const routes: Routes = [
-  {path : '', component : HomeComponent},
+  {path : 'home', component : HomeComponent},
   {path : 'login', component : LoginComponent },
   {path : 'register', component : RegisterComponent },
-  {path : 'admin', component : AdminComponent },
-  {path : 'metricas', component : MetricasComponent },
-  {path : 'map', component : MapComponent},
-  {path : 'admin-viv', component : AdminVivComponent},
-  {path : 'gestionar-viviendas', component : GestionarViviendasComponent},
-  {path : 'profile', component : ProfileComponent},
+  {path : 'admin', component : AdminComponent,canActivate:[AdminGuard] },
+  {path : 'metricas', component : MetricasComponent, canActivate:[AdminGuard] },
+  {path : 'map', component : MapComponent,canActivate:[AdminGuard]},
+  {path : 'admin-viv', component : AdminVivComponent,canActivate:[AdminGuard]},
+  {path : 'gestionar-viviendas', component : GestionarViviendasComponent,canActivate:[AdminGuard]},
+  {path : 'profile', component : ProfileComponent,canActivate:[AdminGuard]},
   {path: 'recuperar-pass',component : RecuperarPassComponent},
 
-  {path : '**', redirectTo:'',pathMatch:'full' },
+  {path : '**', redirectTo:'home',pathMatch:'full' },
 
 
 ];

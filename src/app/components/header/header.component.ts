@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {CloseSessionComponent} from '../close-session/close-session.component'
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
+import { Router } from '@angular/router';
 @Component({
   selector: 'header-component',
   templateUrl: './header.component.html',
@@ -10,7 +11,8 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class HeaderComponent {
   token:any;
-  constructor(private dialog: MatDialog
+  constructor(private dialog: MatDialog,
+    private router:Router
    ){    
   }
 
@@ -18,6 +20,7 @@ export class HeaderComponent {
     const dialogRef = this.dialog.open(CloseSessionComponent, {
       width:'300px',
     });
+    this.router.navigate(['/home']);
   }
 
   openLogin():void{

@@ -1,6 +1,6 @@
 <mat-toolbar color = "primary">
-  <img src="../assets/protalinmobiliario.png" alt="Logo" class="logo">
-  <h1>CasApp</h1>
+  <img routerLink="/home" src="../assets/protalinmobiliario.png" alt="Logo" class="logo">
+  <h1 routerLink="/home">CasApp</h1>
     <div class="botonesInicio" *ngIf="isLoggedIn()">
       <mat-icon routerLink="/profile" >account_box</mat-icon>
       <mat-icon (click)="openDialog()">power_settings_new</mat-icon>
