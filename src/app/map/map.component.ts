@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 import { ComparacionService } from '../services/comparacion.service';
 import { Region } from '../interfaces/region';
 import { RegionService } from '../services/region.service';
+import { FavoritaService } from '../services/favorita.service';
+import { Favorita } from '../interfaces/favorita';
 
 @Component({
   selector: 'app-map',
@@ -49,7 +51,7 @@ export class MapComponent implements OnInit {
   selectDeshabilitado: boolean = true;
   regionSeleccionada: number;  
 
-  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService, private comunaService: ComunaService,  private toastr:ToastrService, private router: Router, private comparacionService: ComparacionService, private regionService: RegionService) {
+  constructor(private renderer: Renderer2, private filtroService: FiltroService, private viviendaService: ViviendaService, private comunaService: ComunaService,  private toastr:ToastrService, private router: Router, private comparacionService: ComparacionService, private regionService: RegionService, private favService: FavoritaService) {
     this.markers = [];
     this.regionSeleccionada = 0 ;
     this.filtro = {
@@ -316,5 +318,25 @@ export class MapComponent implements OnInit {
   compararVivienda(vivienda: Vivienda) {
     this.comparacionService.compararVivienda(vivienda);
   }
+
+  favoritaVivienda(viviendaId: number) {
+    var userId = sessionStorage.getItem("id") ?? '0';
+
+    const nuevaFavorita: Favorita = {
+      usuario_id_usuario: parseInt(userId, 10),
+      vivienda_id_vivienda: viviendaId,
+    };
+
+    this.favService.register(nuevaFavorita).subscribe(
+      (response) => {
+        console.log('Vivienda agregada a favoritas:', response);
+        // Puedes agregar lógica adicional después de agregar a favoritas si es necesario
+      },
+      (error) => {
+        console.error('Error al agregar vivienda a favoritas:', error);
+      }
+    );
+  }
+
 }
 

@@ -92,11 +92,9 @@
                     <p class="card-text">{{ vivienda.cantidad_banos }} Baños</p>
                   </div>
                   <div style="margin-left:10%; margin-bottom: 2%;">
-                    <a type="button" id="{{vivienda.id}}">
-                      <img src="../assets/not-fav.png" alt="Imagen" width="20" height="20">
-                    </a>           
-                    <button  style="margin-left: 55%;" class="btn btn-dark" [routerLink]="['/vivienda', vivienda.id]">Ver Más</button>
-                    <button style="margin-left: 10px;" class="btn btn-primary" (click)="compararVivienda(vivienda)">Comparar</button>
+                    <button style="margin-left: 10px;" class="btn btn-danger" (click)="vivienda.id !== undefined && favoritaVivienda(vivienda.id)">Agregar a Favorita</button>         
+                    <button style="margin-left: 10px;" class="btn btn-dark" [routerLink]="['/vivienda', vivienda.id]">Ver Más</button>
+                    <button style="margin-left: 90px; margin-top: 3px;" class="btn btn-primary" (click)="compararVivienda(vivienda)">Comparar</button>
                   </div>
                 </div>
               </div>
