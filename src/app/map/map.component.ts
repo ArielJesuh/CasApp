@@ -67,6 +67,7 @@ export class MapComponent implements OnInit {
   }
   
   ngOnInit(): void {
+    this.getListViviendas();
     var userId = sessionStorage.getItem("id") ?? '0';
     this.filtro.usuario_id_usuario = parseInt(userId, 10);
     this.filtroService.getFiltroByUsuario(this.filtro.usuario_id_usuario).subscribe(

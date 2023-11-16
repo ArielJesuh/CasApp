@@ -15,7 +15,7 @@ import { AddViviendaComponent } from '../add-vivienda/add-vivienda.component';
 })
 export class AdminVivComponent implements OnInit {
   listViviendas: Vivienda[] = []
-  displayedColumns: string[] = ['id', 'direccion', 'cantidad_habitaciones', 'cantidad_banos','metros_cuadrados', 'valor_uf','descripcion','url_imagen','comuna_id_comuna','inmobiliario_id_inmobiliario'];
+  displayedColumns: string[] = ['id', 'direccion', 'cantidad_habitaciones', 'cantidad_banos','metros_cuadrados', 'valor_uf','descripcion','url_imagen','comuna_id_comuna','inmobiliario_id_inmobiliario','action'];
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -62,7 +62,7 @@ export class AdminVivComponent implements OnInit {
     window.location.reload();
    }
 
-   deleteUser(id:number){
+   deleteVivienda(id:number){
     this._viviendaService.deleteVivienda(id).subscribe({
       next:(res) => {
         this.toastr.success('Vivienda Eliminada exitosamente','Eliminado');
@@ -75,6 +75,7 @@ export class AdminVivComponent implements OnInit {
 
   openEditForm(id:any){
     this.addViviendaDialog(id,'Editar Vivienda')
+    console.log(id)
   }
 
   openAddForm(){

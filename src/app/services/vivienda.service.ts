@@ -29,4 +29,13 @@ export class ViviendaService {
     return this.http.delete(`${this.myAppUrl}${this.myApiUrl}/${id}`)
   }
 
+
+  register(vivienda:Vivienda):Observable<any>{
+    return this.http.post(`${this.myAppUrl}${this.myApiUrl}`,vivienda)
+  }
+
+  update(id:number,vivienda:Vivienda):Observable<any>{
+    return this.http.put(`${this.myAppUrl}${this.myApiUrl}/${id}`,vivienda)
+  }
+
 }

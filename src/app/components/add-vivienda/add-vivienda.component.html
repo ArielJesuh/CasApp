@@ -1,1 +1,57 @@
-<p>add-vivienda works!</p>
+<div mat-dialog-title>
+    <h1>Formulario Usuario</h1>
+</div>
+<form [formGroup]="viviendaForm" (ngSubmit)="onFormSubmit()">
+<div mat-dialog-content class="cont">
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Direccion</mat-label>
+            <input matInput type="text" formControlName="direccion">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Cantidad Habitaciones</mat-label>
+            <input matInput type="number" formControlName="cantidad_habitaciones">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Cantidad Baños</mat-label>
+            <input matInput type="text" formControlName="cantidad_banos" type="number">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Metros Cuadrados</mat-label>
+            <input matInput formControlName="metros_cuadrados" type="number">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>Valor UF</mat-label>
+            <input matInput  formControlName="valor_uf" type="number">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Descripcion</mat-label>
+            <input matInput formControlName="descripcion" type="text">
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill">
+            <mat-label>URL Imagen</mat-label>
+            <input matInput  formControlName="url_imagen" type="text">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Comuna ID</mat-label>
+            <input matInput formControlName="comuna_id_comuna" type="number">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Inmobiliaria ID</mat-label>
+            <input matInput formControlName="inmobiliario_id_inmobiliario" type="number">
+        </mat-form-field>
+    </div>
+
+</div>
+
+<div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" >Guardar</button>
+</div>
+</form>

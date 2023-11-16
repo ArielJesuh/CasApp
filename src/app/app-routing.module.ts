@@ -16,7 +16,6 @@ const routes: Routes = [
   {path : 'metricas', component : MetricasComponent },
   {path : 'map', component : MapComponent},
   {path : 'admin-viv', component : AdminVivComponent},
-
   {path : '**', redirectTo:'',pathMatch:'full' },
 
 
